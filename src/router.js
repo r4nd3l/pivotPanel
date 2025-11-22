@@ -8,7 +8,6 @@ const router = createRouter({
   routes: [
     { path: '/', component: Home },
     { path: '/missing', component: MissingSchedule },
-    // Catch-all route - redirect anything else to /missing
     { path: '/:pathMatch(.*)*', redirect: '/missing' },
   ],
 })

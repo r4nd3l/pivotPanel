@@ -1,15 +1,6 @@
 <template>
-    <div class="missing-wrapper">
-      <h1>Sorry, but nothing is here!</h1>
-      <p>This page is intentionally left blank.</p>
+    <div class="text-center p-4 font-sans">
+        <h1>Sorry, but nothing is here!</h1>
+        <p>This page is intentionally left blank.</p>
     </div>
-  </template>
-  
-  <style scoped>
-  .missing-wrapper {
-    text-align: center;
-    padding: 40px;
-    font-family: sans-serif;
-  }
-  </style>
-  
+</template>
