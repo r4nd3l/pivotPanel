@@ -1,11 +1,105 @@
 <template>
-  <div>
-    <h2>Week Display</h2>
+  <div class="w-full">
+    <ul class="flex flex-col items-center justify-around w-full list-none p-0 m-0">
+      <li 
+        v-for="(day, index) in displayedDays" 
+        :key="day.date"
+        class="flex flex-row items-center justify-start h-[330px] border-t w-full"
+      >
+        <div class="flex flex-col items-center justify-center gap-4 border-r border-gray-500 h-full w-[550px]">
+            <span class="text-[4rem] font-semibold m-0 p-0">{{ day.day_name }}</span>
+            <span class="text-[3rem] m-0 p-0">{{ formatDate(day) }}</span>
+            <span class="text-[2rem] text-gray-600 m-0 p-0">{{ day.type }}</span>
+        </div>
+        <div class="w-full h-full">
+            <span v-if="index === 2" class="text-xs font-bold text-blue-500 mt-1">Today</span>
+            <span v-if="day.bank_holiday" class="text-xs text-red-500">{{ day.bank_holiday }}</span>
+        </div>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script setup>
+import { computed } from 'vue'
+import { getCurrentDateString } from '../utils/dateUtils.js'
+/** @typedef {import('../types/schedule.js').CalendarDay} CalendarDay */
+/** @typedef {import('../types/schedule.js').ScheduleApiResponse} ScheduleApiResponse */
 
+const props = defineProps({
+  /** @type {ScheduleApiResponse} */
+  data: {
+    type: Object,
+    required: true
+  }
+})
+
+/**
+ * Find the index of the current day in the calendar array
+ */
+const findCurrentDayIndex = () => {
+  const currentDate = getCurrentDateString()
+  return props.data.calendar.findIndex(day => day.date === currentDate)
+}
+
+/**
+ * Get the 5 days to display: 2 before, today, 2 after
+ */
+const displayedDays = computed(() => {
+  if (!props.data || !props.data.calendar || props.data.calendar.length === 0) {
+    return []
+  }
+
+  const currentIndex = findCurrentDayIndex()
+  
+  // If current day not found, return empty array
+  if (currentIndex === -1) {
+    return []
+  }
+
+  // Calculate the range: 2 days before to 2 days after (5 days total)
+  const startIndex = Math.max(0, currentIndex - 2)
+  const endIndex = Math.min(props.data.calendar.length - 1, currentIndex + 2)
+  
+  // Get the 5 days
+  const days = props.data.calendar.slice(startIndex, endIndex + 1)
+  
+  // If we don't have enough days before, pad with what we have
+  if (days.length < 5 && startIndex === 0) {
+    // We're at the beginning, can't get more previous days
+    return days
+  }
+  
+  // If we don't have enough days after, we can't pad
+  if (days.length < 5 && endIndex === props.data.calendar.length - 1) {
+    return days
+  }
+  
+  // Ensure we have exactly 5 days centered on today
+  if (days.length === 5) {
+    return days
+  }
+  
+  // Adjust to get exactly 5 days if possible
+  const targetStart = Math.max(0, currentIndex - 2)
+  const targetEnd = Math.min(props.data.calendar.length - 1, targetStart + 4)
+  return props.data.calendar.slice(targetStart, targetEnd + 1)
+})
+
+/**
+ * Format date in Hungarian format: "Nov. 23"
+ * @param {CalendarDay} day - The day object from the API
+ * @returns {string} Formatted date string
+ */
+const formatDate = (day) => {
+  // Extract day number from date string (YYYY-MM-DD format)
+  const [, , dayNumber] = day.date.split('-')
+  
+  // Get abbreviated Hungarian month name (first 3 letters + period)
+  const monthAbbr = day.month_name.substring(0, 3) + '.'
+  
+  return `${monthAbbr} ${dayNumber}.`
+}
 </script>
 
 <style scoped>

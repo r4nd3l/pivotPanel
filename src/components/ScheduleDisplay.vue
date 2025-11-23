@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-[270px]">
     <div class="flex flex-row items-center justify-around w-full">
-      <h2 class="text-[4rem] capitalize m-0 p-0">{{ phaseLabel }}</h2>
+      <h2 class="text-[4rem] normal-case m-0 p-0">{{ phaseLabel }}</h2>
       <h3 class="text-[6rem]">{{ currentTime }}</h3>
     </div>
     <div class="flex flex-row items-center justify-center w-full">
