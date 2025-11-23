@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full">
+  <div class="w-full h-[270px]">
     <div class="flex flex-row items-center justify-around w-full">
       <h2 class="text-[4rem] capitalize m-0 p-0">{{ phaseLabel }}</h2>
       <h3 class="text-[6rem]">{{ currentTime }}</h3>
@@ -30,8 +30,9 @@ const formatDate = () => {
   const now = new Date()
   const year = now.getFullYear()
   const month = now.toLocaleDateString('hu-HU', { month: 'long' })
+  const date = now.getDate()
   const day = now.toLocaleDateString('hu-HU', { weekday: 'long' })
-  return `${year} - ${month} - ${day}`
+  return `${year} - ${month} - ${date} - ${day}`
 }
 
 const updateTime = () => {

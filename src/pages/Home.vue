@@ -2,6 +2,7 @@
     <div class="flex flex-col items-center justify-start w-[1080px] h-[1920px] mx-auto border border-red-500">
       <div v-if="scheduleData" class="w-full">
           <ScheduleDisplay :data="scheduleData" class="border-b border-gray-500" />
+          <WeekDisplay :data="scheduleData" class="border-b border-gray-500" />
       </div>
       <div v-else>
           Loading data…
@@ -13,6 +14,7 @@
 import { ref, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import ScheduleDisplay from '../components/ScheduleDisplay.vue'
+import WeekDisplay from '../components/WeekDisplay.vue'
 
 const router = useRouter()
 const route = useRoute()
