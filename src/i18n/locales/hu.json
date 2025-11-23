@@ -10,5 +10,18 @@
     "default": "Alapértelmezett"
   },
   "today": "Mai nap",
-  "bank_holiday": "egy ünnepnap"
+  "bank_holiday": "egy ünnepnap",
+  "work_today": "Rendelési idő:",
+  "no_work_today": "Nincs munka",
+  "week": {
+    "monday": "Hétfő",
+    "tuesday": "Kedd",
+    "wednesday": "Szerda",
+    "thursday": "Csütörtök",
+    "friday": "Péntek",
+    "saturday": "Szombat",
+    "sunday": "Vasárnap"
+  },
+  "week_even": "páros",
+  "week_odd": "páratlan"
 }

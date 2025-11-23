@@ -10,5 +10,16 @@
     "default": "Default"
   },
   "today": "Today",
-  "bank_holiday": "Bank Holiday"
+  "bank_holiday": "Bank Holiday",
+  "work_today": "Appointment time today:",
+  "no_work_today": "No work today!",
+  "week": {
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday"
+  }
 }
