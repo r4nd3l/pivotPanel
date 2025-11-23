@@ -1,0 +1,12 @@
+{
+  "phases": {
+    "hajnal": "hajnal",
+    "reggel": "reggel",
+    "delelo": "délelőtt",
+    "delutan": "délután",
+    "keso_delutan": "Késő délután",
+    "este": "este",
+    "ejszaka": "éjszaka",
+    "default": "Alapértelmezett"
+  }
+}

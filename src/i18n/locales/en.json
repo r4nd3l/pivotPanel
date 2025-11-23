@@ -1,0 +1,12 @@
+{
+  "phases": {
+    "hajnal": "Dawn",
+    "reggel": "Morning",
+    "delelo": "Forenoon",
+    "delutan": "Afternoon",
+    "keso_delutan": "Late Afternoon",
+    "este": "Evening",
+    "ejszaka": "Night",
+    "default": "Default"
+  }
+}
