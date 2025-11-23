@@ -8,5 +8,7 @@
     "este": "este",
     "ejszaka": "éjszaka",
     "default": "Alapértelmezett"
-  }
+  },
+  "today": "Mai nap",
+  "bank_holiday": "egy ünnepnap"
 }

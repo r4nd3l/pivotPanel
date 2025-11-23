@@ -8,5 +8,7 @@
     "este": "Evening",
     "ejszaka": "Night",
     "default": "Default"
-  }
+  },
+  "today": "Today",
+  "bank_holiday": "Bank Holiday"
 }

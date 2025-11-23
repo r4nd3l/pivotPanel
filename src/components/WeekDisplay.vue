@@ -11,9 +11,14 @@
             <span class="text-[3rem] m-0 p-0">{{ formatDate(day) }}</span>
             <span class="text-[2rem] text-gray-600 m-0 p-0">{{ day.type }}</span>
         </div>
-        <div class="w-full h-full">
-            <span v-if="index === 2" class="text-xs font-bold text-blue-500 mt-1">Today</span>
-            <span v-if="day.bank_holiday" class="text-xs text-red-500">{{ day.bank_holiday }}</span>
+        <div class="w-full h-full text-center">
+            <span v-if="index === 2" class="text-[2rem] px-4 text-center w-full flex flex-row items-center justify-center gap-2 font-bold text-blue-500 mt-1 border-b border-gray-500">
+                {{ t('today') }}
+                <span v-if="day.bank_holiday" class="lowercase text-red-500">
+                    <i class="mr-1">{{ t('bank_holiday') }}:</i>
+                    {{ day.bank_holiday }}
+                </span>
+            </span>
         </div>
       </li>
     </ul>
@@ -22,9 +27,12 @@
 
 <script setup>
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { getCurrentDateString } from '../utils/dateUtils.js'
 /** @typedef {import('../types/schedule.js').CalendarDay} CalendarDay */
 /** @typedef {import('../types/schedule.js').ScheduleApiResponse} ScheduleApiResponse */
+
+const { t } = useI18n()
 
 const props = defineProps({
   /** @type {ScheduleApiResponse} */
