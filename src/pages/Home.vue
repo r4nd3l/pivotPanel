@@ -51,7 +51,7 @@ onMounted(() => {
   // Start minimum loading timer (3 seconds)
   loadingTimeout = setTimeout(() => {
     minimumLoadTimePassed.value = true
-  }, 300000)
+  }, 3000)
 
   fetchSchedule()
 })
