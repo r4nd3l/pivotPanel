@@ -1,8 +1,8 @@
 <template>
-  <div class="w-full h-[270px]">
+  <div class="w-full h-fit">
     <div class="flex flex-row items-center justify-around w-full">
-      <h2 class="text-[4rem] normal-case m-0 p-0">{{ phaseLabel }}</h2>
-      <h3 class="text-[6rem]">{{ currentTime }}</h3>
+      <h2 class="text-[4rem] capitalize m-0 p-0">{{ phaseLabel }}</h2>
+      <h3 class="text-[6rem]"><i class="mdi mdi-clock-outline mr-4"></i>{{ currentTime }}</h3>
     </div>
     <div class="flex flex-row items-center justify-center w-full">
       <p class="text-[4rem] capitalize">{{ currentDate }}</p>
@@ -22,8 +22,8 @@ const formatTime = () => {
   const now = new Date()
   const hours = String(now.getHours()).padStart(2, '0')
   const minutes = String(now.getMinutes()).padStart(2, '0')
-  const seconds = String(now.getSeconds()).padStart(2, '0')
-  return `${hours}:${minutes}:${seconds}`
+  // const seconds = String(now.getSeconds()).padStart(2, '0')
+  return `${hours}:${minutes}`
 }
 
 const formatDate = () => {

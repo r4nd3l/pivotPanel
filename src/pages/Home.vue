@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col items-center justify-start w-[1080px] h-[1920px] mx-auto border border-red-500">
+    <div class="flex flex-col items-center justify-start w-[1080px] h-[1920px] mx-auto">
       <div v-if="scheduleData" class="w-full">
           <ScheduleDisplay :data="scheduleData" />
           <WeekDisplay :data="scheduleData" />

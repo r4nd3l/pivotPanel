@@ -1,8 +1,8 @@
 <template>
 	<div class="w-full">
 		<ul class="flex flex-col items-center justify-around w-full list-none p-0 m-0">
-			<li v-for="(day, index) in displayedDays" :key="day.date" class="flex flex-row items-center justify-start h-[330px] border-t w-full">
-				<div class="flex flex-col items-center justify-center gap-4 border-r border-gray-500 h-full w-[550px]">
+			<li v-for="(day, index) in displayedDays" :key="day.date" class="flex flex-row items-center justify-start h-[330px] border-t-4 w-full">
+				<div class="flex flex-col items-center justify-center gap-4 border-r-4 border-gray-500 h-full w-[550px]">
 					<span class="text-[4rem] font-semibold m-0 p-0">{{ day.day_name }}</span>
 					<span class="text-[3rem] m-0 p-0">{{ formatDate(day) }}</span>
 					<span class="text-[2rem] text-gray-600 m-0 p-0">{{ day.type }}</span>
@@ -10,7 +10,7 @@
 				<div class="w-full h-full text-center">
 					<span
 						v-if="index === 2"
-						class="text-[2rem] px-4 text-center w-full flex flex-row items-center justify-center gap-2 font-bold text-blue-500 mt-1 border-b border-gray-500"
+						class="text-[2rem] px-4 text-center w-full flex flex-row items-center justify-center gap-2 font-bold text-blue-500 mt-1 border-b-4 border-gray-500"
 					>
 						{{ t("today") }}
 						<span v-if="day.bank_holiday" class="lowercase text-red-500">

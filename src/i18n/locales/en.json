@@ -21,5 +21,7 @@
     "friday": "Friday",
     "saturday": "Saturday",
     "sunday": "Sunday"
-  }
+  },
+  "week_even": "even",
+  "week_odd": "odd"
 }
