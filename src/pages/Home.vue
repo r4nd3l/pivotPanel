@@ -1,11 +1,14 @@
 <template>
-    <div class="flex flex-col items-center justify-start w-[1080px] h-[1920px] mx-auto">
+    <div class="flex flex-col items-center justify-start w-[1080px] h-full mx-auto bg-linear-to-br from-gray-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-8">
       <div v-if="scheduleData" class="w-full">
           <ScheduleDisplay :data="scheduleData" />
           <WeekDisplay :data="scheduleData" />
       </div>
-      <div v-else>
-          Loading data…
+      <div v-else class="flex flex-col items-center justify-center h-full">
+          <div class="flex flex-col items-center gap-6">
+            <div class="animate-spin rounded-full h-24 w-24 border-t-4 border-b-4 border-blue-600"></div>
+            <p class="text-4xl font-semibold text-gray-700 dark:text-gray-300">Loading data…</p>
+          </div>
       </div>
     </div>
 </template>
