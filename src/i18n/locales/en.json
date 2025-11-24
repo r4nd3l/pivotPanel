@@ -23,5 +23,6 @@
     "sunday": "Sunday"
   },
   "week_even": "even",
-  "week_odd": "odd"
+  "week_odd": "odd",
+  "loading": "Loading data…"
 }

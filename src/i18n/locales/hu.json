@@ -23,5 +23,6 @@
     "sunday": "Vasárnap"
   },
   "week_even": "páros",
-  "week_odd": "páratlan"
+  "week_odd": "páratlan",
+  "loading": "Adatok betöltése…"
 }
