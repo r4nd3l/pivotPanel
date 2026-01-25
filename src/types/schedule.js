@@ -13,6 +13,7 @@
  * @property {string} week_type
  * @property {string} type
  * @property {string} bank_holiday
+ * @property {string} work - "yes" or "no" indicating if it's a work day
  */
 
 /**

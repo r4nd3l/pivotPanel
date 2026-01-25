@@ -58,12 +58,7 @@
 					</div>
 					<div class="w-full h-full flex flex-col items-center justify-center gap-4">
 						<div
-							v-if="
-								(day.day_name === t('week.monday') ||
-									day.day_name === t('week.tuesday') ||
-									day.day_name === t('week.friday')) &&
-								!day.bank_holiday
-							"
+							v-if="day.work === 'yes' && !day.bank_holiday"
 							:class="[
 								'flex flex-col items-center gap-3 p-6 rounded-xl',
 								index === 2 

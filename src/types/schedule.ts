@@ -10,6 +10,7 @@ export interface CalendarDay {
   week_type: string
   type: string
   bank_holiday: string
+  work: string // "yes" or "no"
 }
 
 /**
