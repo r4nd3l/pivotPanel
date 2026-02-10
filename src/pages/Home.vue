@@ -1,6 +1,8 @@
 <template>
     <div class="flex flex-col items-center justify-start w-[1080px] h-full mx-auto bg-linear-to-br from-gray-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-8">
       <div v-if="scheduleData && minimumLoadTimePassed" class="w-full">
+          <!-- Toggle switches row above the schedule card -->
+          <ToggleSwitches />
           <ScheduleDisplay :data="scheduleData" />
           <WeekDisplay :data="scheduleData" />
       </div>
@@ -19,6 +21,7 @@ import { useRouter, useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import ScheduleDisplay from '../components/ScheduleDisplay.vue'
 import WeekDisplay from '../components/WeekDisplay.vue'
+import ToggleSwitches from '../components/ToggleSwitches.vue'
 import useSchedule from '../composables/useSchedule.js'
 
 const router = useRouter()
