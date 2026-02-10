@@ -35,8 +35,8 @@
         <!-- Content -->
         <div class="flex flex-col items-center gap-6 px-6 text-center">
           <i class="mdi mdi-battery-alert-variant-outline text-white text-8xl md:text-9xl drop-shadow-lg"></i>
-          <p class="text-white text-3xl md:text-4xl font-bold max-w-3xl drop-shadow-md">
-            A telefonon le van merülve, rakd fel tölteni!
+          <p class="text-white text-8xl font-bold drop-shadow-md">
+            A telefonod le van merülve, rakd fel tölteni!
           </p>
         </div>
       </div>
