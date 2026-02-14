@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full mb-4">
+  <div class="w-full">
     <!-- Toggle row -->
     <div
       class="flex items-center justify-end gap-4 w-full px-4 pb-2"

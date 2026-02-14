@@ -1,6 +1,6 @@
 <template>
-  <div class="w-full h-fit bg-linear-to-br from-blue-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-2xl p-8 mb-6 border border-blue-200 dark:border-gray-700">
-    <div class="flex flex-row items-center justify-around w-full mb-6">
+  <div class="w-full h-fit bg-linear-to-br from-blue-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-2xl p-6 md:p-8 border border-blue-200 dark:border-gray-700 shrink-0">
+    <div class="flex flex-row flex-wrap items-center justify-around gap-6 w-full mb-6">
       <div class="flex flex-col items-center">
         <i class="mdi mdi-weather-sunset text-6xl text-amber-500 mb-2"></i>
         <h2 class="text-5xl font-bold capitalize m-0 p-0 text-gray-800 dark:text-gray-100 tracking-wide">
@@ -14,9 +14,9 @@
         </h3>
       </div>
     </div>
-    <div class="flex flex-row items-center justify-center w-full bg-white dark:bg-gray-800 rounded-xl px-6 py-4 shadow-md">
-      <i class="mdi mdi-calendar-text text-5xl text-indigo-600 dark:text-indigo-400 mr-4"></i>
-      <p class="text-4xl font-semibold capitalize text-gray-700 dark:text-gray-200 m-0">
+    <div class="flex flex-row items-center justify-center w-full bg-white dark:bg-gray-800 rounded-xl px-6 py-4 shadow-md shrink-0">
+      <i class="mdi mdi-calendar-text text-5xl text-indigo-600 dark:text-indigo-400 mr-4 shrink-0"></i>
+      <p class="text-2xl md:text-4xl font-semibold capitalize text-gray-700 dark:text-gray-200 m-0 break-words">
         {{ currentDate }}
       </p>
     </div>

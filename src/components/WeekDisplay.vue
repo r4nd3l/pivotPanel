@@ -1,6 +1,6 @@
 <template>
-	<div class="w-full">
-		<ul class="flex flex-col items-center justify-around w-full list-none p-0 m-0 gap-2">
+	<div class="w-full shrink-0">
+		<ul class="flex flex-col items-stretch w-full list-none p-0 m-0 gap-4">
 			<li 
 				v-for="(day, index) in displayedDays" 
 				:key="day.date" 
@@ -40,10 +40,10 @@
 								: 'text-orange-700 dark:text-orange-400 bg-orange-100 dark:bg-orange-900/30'
 					]">{{ day.type }}</span>
 				</div>
-				<div class="w-full h-full text-center flex flex-col justify-center p-6">
+				<div class="w-full h-full min-h-0 text-center flex flex-col justify-start gap-4 p-6 overflow-y-auto">
 					<div
 						v-if="index === 0"
-						class="mb-4 pb-4 border-b-2 border-white/30"
+						class="shrink-0 mb-4 pb-4 border-b-2 border-white/30"
 					>
 						<div class="flex flex-row items-center justify-center gap-3 mb-2">
 							<i class="mdi mdi-star-circle text-4xl text-yellow-300"></i>
@@ -56,7 +56,7 @@
 							<span class="lowercase">{{ t("bank_holiday") }}: {{ day.bank_holiday }}</span>
 						</span>
 					</div>
-					<div class="w-full h-full flex flex-col items-center justify-center gap-4">
+					<div class="w-full flex flex-col items-center justify-start gap-4 shrink-0">
 						<div
 							v-if="day.work === 'yes' && !day.bank_holiday"
 							:class="[
@@ -98,6 +98,38 @@
 							>
 								12:30 - 17:00
 							</div>
+						</div>
+						<div
+							v-if="marcsiText(day)"
+							:class="[
+								'flex flex-col items-center justify-center gap-3 p-6 rounded-xl text-center shrink-0',
+								index === 0 
+									? 'bg-white/20 backdrop-blur-sm' 
+									: 'bg-green-50 dark:bg-green-900/20 border-2 border-green-200 dark:border-green-700'
+							]"
+						>
+							<p :class="[
+								'text-2xl font-semibold px-4 py-3 rounded-lg text-pretty',
+								index === 0 
+									? 'text-white bg-blue-600/40' 
+									: 'text-green-800 dark:text-green-300 bg-green-200 dark:bg-green-800/40'
+							]">{{ marcsiText(day) }}</p>
+						</div>
+						<div
+							v-if="ilonaText(day)"
+							:class="[
+								'flex flex-col items-center justify-center gap-3 p-6 rounded-xl text-center shrink-0',
+								index === 0 
+									? 'bg-white/20 backdrop-blur-sm' 
+									: 'bg-green-50 dark:bg-green-900/20 border-2 border-green-200 dark:border-green-700'
+							]"
+						>
+							<p :class="[
+								'text-2xl font-semibold px-4 py-3 rounded-lg text-pretty',
+								index === 0 
+									? 'text-white bg-blue-600/40' 
+									: 'text-green-800 dark:text-green-300 bg-green-200 dark:bg-green-800/40'
+							]">{{ ilonaText(day) }}</p>
 						</div>
 					</div>
 				</div>
@@ -151,6 +183,28 @@ const displayedDays = computed(() => {
 	const endIndex = Math.min(props.data.calendar.length - 1, currentIndex + 4);
 	return props.data.calendar.slice(startIndex, endIndex + 1);
 });
+
+/**
+ * Get marcsi_day value from day (bracket notation so the property is always read)
+ * @param {CalendarDay} day
+ * @returns {string}
+ */
+const marcsiText = (day) => {
+	if (!day || typeof day !== "object") return "";
+	const v = day["marcsi_day"] ?? day.marcsi_day ?? "";
+	return typeof v === "string" ? v.trim() : "";
+};
+
+/**
+ * Get ilona_day value from day (bracket notation so the property is always read)
+ * @param {CalendarDay} day
+ * @returns {string}
+ */
+const ilonaText = (day) => {
+	if (!day || typeof day !== "object") return "";
+	const v = day["ilona_day"] ?? day.ilona_day ?? "";
+	return typeof v === "string" ? v.trim() : "";
+};
 
 /**
  * Format date in Hungarian format: "Nov. 23"

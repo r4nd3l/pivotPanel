@@ -1,6 +1,6 @@
 <template>
-    <div class="flex flex-col items-center justify-start w-[1080px] h-full mx-auto bg-linear-to-br from-gray-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-8">
-      <div v-if="scheduleData && minimumLoadTimePassed" class="w-full">
+    <div class="flex flex-col items-center justify-start w-full max-w-[1080px] min-h-full mx-auto bg-linear-to-br from-gray-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-6 md:p-8">
+      <div v-if="scheduleData && minimumLoadTimePassed" class="w-full flex flex-col gap-6">
           <!-- Toggle switches row above the schedule card -->
           <ToggleSwitches />
           <ScheduleDisplay :data="scheduleData" />
