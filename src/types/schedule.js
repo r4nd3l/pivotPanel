@@ -13,9 +13,13 @@
  * @property {string} week_type - "páros" | "páratlan"
  * @property {string} type - "Hétköznap" | "Hétvége"
  * @property {string} bank_holiday - Empty string or holiday name (e.g. "Újév", "Nemzeti ünnep")
+ * @property {string} medicine - Daily medicine reminder (e.g. "XY gyógyszer 2x1")
+ * @property {string} hand_creme - Daily hand creme reminder (e.g. "Kenőcs 2x1")
+ * @property {string} phone - Daily phone check reminder (e.g. "Telefon töltöttség ellőrzése!")
+ * @property {string} lunch - Daily lunch time info (e.g. "11:30 - 12:30 között ebéd várható!")
  * @property {string} [work] - If present: "yes" | "no" for appointment day (API v1.2 sample omits this)
- * @property {string} [marcsi_day] - When present: message for Marcsi (e.g. "Ma 09:00-kor Marcsi, (rendrakás) várható!")
- * @property {string} [ilona_day] - When present: message for Ilona (e.g. "Ma délelőtt Ilona, (takarítás) várható!")
+ * @property {string} [marcsi_day] - When present: message for Marcsi (e.g. "09:00-kor Marcsi, (rendrakás) várható!")
+ * @property {string} [ilona_day] - When present: message for Ilona (e.g. "Délelőtt Ilona, (takarítás) várható!")
  */
 
 /**

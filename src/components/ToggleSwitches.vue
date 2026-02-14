@@ -36,7 +36,9 @@
         <div class="flex flex-col items-center gap-6 px-6 text-center">
           <i class="mdi mdi-battery-alert-variant-outline text-white text-8xl md:text-9xl drop-shadow-lg"></i>
           <p class="text-white text-8xl font-bold drop-shadow-md">
-            A telefonod le van merülve, rakd fel tölteni!
+            A telefonod le van merülve, rakd fel tölteni! 
+            <br>
+            Valamint, ha nincs bekapcsolva, kapcsold be!
           </p>
         </div>
       </div>

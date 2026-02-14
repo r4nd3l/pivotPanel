@@ -5,14 +5,14 @@
 				v-for="(day, index) in displayedDays" 
 				:key="day.date" 
 				:class="[
-					'flex flex-row items-center justify-start h-[330px] w-full rounded-xl shadow-lg transition-all duration-300',
+					'flex flex-row items-center justify-start h-[660px] w-full rounded-xl shadow-lg transition-all duration-300',
 					index === 0 
 						? 'bg-linear-to-r from-blue-500 to-indigo-600 border-4 border-blue-400 shadow-2xl transform scale-[1.02]' 
 						: 'bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 hover:shadow-xl hover:border-blue-300'
 				]"
 			>
 				<div :class="[
-					'flex flex-col items-center justify-center gap-4 h-full w-[550px] rounded-l-xl p-6',
+					'flex flex-col items-center justify-start gap-4 h-full w-[550px] rounded-l-xl p-6 pt-10',
 					index === 0 
 						? 'bg-white/20 backdrop-blur-sm border-r-4 border-white/30' 
 						: 'bg-linear-to-br from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800 border-r-2 border-gray-300 dark:border-gray-600'
@@ -40,7 +40,8 @@
 								: 'text-orange-700 dark:text-orange-400 bg-orange-100 dark:bg-orange-900/30'
 					]">{{ day.type }}</span>
 				</div>
-				<div class="w-full h-full min-h-0 text-center flex flex-col justify-start gap-4 p-6 overflow-y-auto">
+				<div class="w-full h-full min-h-0 text-center flex flex-col justify-between p-6 overflow-y-auto">
+					<div class="flex flex-col justify-start gap-4">
 					<div
 						v-if="index === 0"
 						class="shrink-0 mb-4 pb-4 border-b-2 border-white/30"
@@ -132,6 +133,33 @@
 							]">{{ ilonaText(day) }}</p>
 						</div>
 					</div>
+					</div>
+					<!-- Daily reminders - sticky bottom -->
+					<div
+						:class="[
+							'mt-auto pt-4 shrink-0 flex flex-col gap-2 rounded-xl p-4',
+							index === 0
+								? 'bg-white/10 backdrop-blur-sm border border-white/20'
+								: 'bg-gray-50 dark:bg-gray-800/40 border border-gray-200 dark:border-gray-700'
+						]"
+					>
+						<div class="flex items-center gap-3" v-if="day.medicine">
+							<i :class="['mdi mdi-pill text-3xl', index === 0 ? 'text-pink-300' : 'text-pink-500 dark:text-pink-400']"></i>
+							<span :class="['text-2xl font-medium', index === 0 ? 'text-white/90' : 'text-gray-700 dark:text-gray-300']">{{ day.medicine }}</span>
+						</div>
+						<div class="flex items-center gap-3" v-if="day.hand_creme">
+							<i :class="['mdi mdi-hand-heart text-3xl', index === 0 ? 'text-amber-300' : 'text-amber-500 dark:text-amber-400']"></i>
+							<span :class="['text-2xl font-medium', index === 0 ? 'text-white/90' : 'text-gray-700 dark:text-gray-300']">{{ day.hand_creme }}</span>
+						</div>
+						<div class="flex items-center gap-3" v-if="day.phone">
+							<i :class="['mdi mdi-cellphone-check text-3xl', index === 0 ? 'text-cyan-300' : 'text-cyan-500 dark:text-cyan-400']"></i>
+							<span :class="['text-2xl font-medium', index === 0 ? 'text-white/90' : 'text-gray-700 dark:text-gray-300']">{{ day.phone }}</span>
+						</div>
+						<div class="flex items-center gap-3" v-if="day.lunch">
+							<i :class="['mdi mdi-food text-3xl', index === 0 ? 'text-green-300' : 'text-green-500 dark:text-green-400']"></i>
+							<span :class="['text-2xl font-medium', index === 0 ? 'text-white/90' : 'text-gray-700 dark:text-gray-300']">{{ day.lunch }}</span>
+						</div>
+					</div>
 				</div>
 			</li>
 		</ul>
@@ -178,9 +206,9 @@ const displayedDays = computed(() => {
 		return [];
 	}
 
-	// Today first, then +4 days (5 days total)
+	// Today first, then +2 days (3 days total)
 	const startIndex = currentIndex;
-	const endIndex = Math.min(props.data.calendar.length - 1, currentIndex + 4);
+	const endIndex = Math.min(props.data.calendar.length - 1, currentIndex + 2);
 	return props.data.calendar.slice(startIndex, endIndex + 1);
 });
 
