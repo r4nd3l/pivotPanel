@@ -4,25 +4,30 @@
           <ToggleSwitches />
           <div class="flex flex-row gap-4 flex-1 min-h-0">
             <!-- Left panel: time / date / phase -->
-            <div class="flex flex-col items-center justify-between gap-6 flex-1 basis-0 min-w-0 bg-linear-to-br from-blue-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-2xl p-8 border border-blue-200 dark:border-gray-700">
-              <div class="flex flex-col items-center">
-                <i class="mdi mdi-weather-sunset text-[12rem] text-amber-500 mb-4"></i>
-                <h2 class="text-8xl font-bold capitalize m-0 p-0 text-gray-800 dark:text-gray-100 tracking-wide">
+            <div class="flex flex-col items-center justify-around gap-6 h-full flex-1 basis-0 min-w-0 bg-linear-to-br from-blue-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-2xl p-6 border border-blue-200 dark:border-gray-700">
+              <div class="flex flex-col items-center justify-center gap-8">
+                <i class="mdi mdi-weather-sunset text-8xl text-amber-500"></i>
+                <h2 class="text-5xl font-bold m-0 p-0 text-gray-800 dark:text-gray-100 tracking-wide">
                   {{ t("today_now") }} 
-                  <span class="text-8xl px-6 py-3 rounded-lg font-medium text-white bg-white/20">{{ phaseLabel }}</span>
+                  <span class="text-5xl px-4 py-2 rounded-lg font-medium text-white bg-white/20">{{ phaseLabel }}</span>
                   {{ t("today_now_is") }}
                 </h2>
               </div>
-              <div class="flex flex-row items-center justify-center bg-white dark:bg-gray-800 rounded-2xl px-10 py-8 shadow-lg border-2 border-blue-300 dark:border-blue-600">
-                <i class="mdi mdi-clock-outline text-[10rem] text-blue-600 dark:text-blue-400 mr-8"></i>
-                <h3 class="text-[10rem] font-mono font-bold text-gray-900 dark:text-gray-100 m-0 leading-none">
+              <div class="flex flex-row items-center justify-center bg-white dark:bg-gray-800 rounded-2xl px-8 py-6 shadow-lg border-2 border-blue-300 dark:border-blue-600">
+                <i class="mdi mdi-clock-outline text-8xl text-blue-600 dark:text-blue-400 mr-6"></i>
+                <h3 class="text-9xl font-mono font-bold text-gray-900 dark:text-gray-100 m-0 leading-none">
                   {{ currentTime }}
                 </h3>
               </div>
-              <div class="flex flex-row items-center justify-center w-full bg-white dark:bg-gray-800 rounded-xl px-8 py-6 shadow-md">
-                <i class="mdi mdi-calendar-text text-8xl text-indigo-600 dark:text-indigo-400 mr-6 shrink-0"></i>
-                <p class="text-6xl font-semibold capitalize text-gray-700 dark:text-gray-200 m-0 wrap-break-word">
-                  {{ currentDate }}
+              <div class="flex flex-col items-center justify-between w-full bg-white dark:bg-gray-800 rounded-xl px-6 py-4 shadow-md gap-3">
+                <div class="flex flex-row items-center justify-center w-full">
+                  <i class="mdi mdi-television-classic text-5xl text-indigo-600 dark:text-indigo-400 mr-4 shrink-0"></i>
+                  <p class="text-4xl font-semibold text-gray-700 dark:text-gray-200 m-0 wrap-break-word">
+                    {{ t("today_movie") }} 
+                  </p>
+                </div>
+                <p class="text-4xl font-semibold text-gray-700 dark:text-gray-200 m-0 wrap-break-word">
+                  {{ t("today_movie") }} 
                 </p>
               </div>
             </div>
