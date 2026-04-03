@@ -9,7 +9,11 @@
     "ejszaka": "éjszaka",
     "default": "Alapértelmezett"
   },
-  "today": "Mai nap",
+  "today": "Ma",
+  "today_is": "van és ",
+  "today_date": "Mai dátum: ",
+  "today_now": "Most ",
+  "today_now_is": " van",
   "bank_holiday": "egy ünnepnap",
   "work_today": "Rendelési idő:",
   "week": {
