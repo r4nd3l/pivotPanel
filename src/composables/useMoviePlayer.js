@@ -28,7 +28,7 @@ export default function useMoviePlayer(scheduleData) {
     const link = movieLink.value
     if (!link) return ''
     const id = extractVideoId(link)
-    return id ? `https://www.youtube.com/embed/${id}?enablejsapi=1&autoplay=1&rel=0` : ''
+    return id ? `https://www.youtube.com/embed/${id}?enablejsapi=1&autoplay=1&rel=0&vq=large` : ''
   })
 
   /**
@@ -72,6 +72,8 @@ export default function useMoviePlayer(scheduleData) {
     })
   }
 
+  const PREFERRED_QUALITY = 'large'
+
   /**
    * Initialize the YT player on a given iframe element.
    * Call this from the component after the iframe is mounted.
@@ -84,7 +86,25 @@ export default function useMoviePlayer(scheduleData) {
       player.value = null
     }
     player.value = new window.YT.Player(iframeId, {
+      playerVars: {
+        autoplay: 1,
+        rel: 0,
+        modestbranding: 1,
+        controls: 0,
+        fs: 0,
+        iv_load_policy: 3,
+        disablekb: 1,
+        vq: PREFERRED_QUALITY,
+      },
       events: {
+        onReady: (event) => {
+          event.target.setPlaybackQuality(PREFERRED_QUALITY)
+        },
+        onPlaybackQualityChange: (event) => {
+          if (event.data !== PREFERRED_QUALITY) {
+            event.target.setPlaybackQuality(PREFERRED_QUALITY)
+          }
+        },
         onStateChange: (event) => {
           if (event.data === window.YT.PlayerState.ENDED) {
             closeMovie()
