@@ -20,6 +20,8 @@
  * @property {string} [work] - If present: "yes" | "no" for appointment day (API v1.2 sample omits this)
  * @property {string} [marcsi_day] - When present: message for Marcsi (e.g. "09:00-kor Marcsi, (rendrakás) várható!")
  * @property {string} [ilona_day] - When present: message for Ilona (e.g. "Délelőtt Ilona, (takarítás) várható!")
+ * @property {string} [movie_title] - Movie title for the day (e.g. "The Matrix")
+ * @property {string} [movie_link] - YouTube link for the movie (e.g. "https://www.youtube.com/watch?v=abcd1234")
  */
 
 /**

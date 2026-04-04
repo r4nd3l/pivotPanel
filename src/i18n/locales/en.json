@@ -11,6 +11,8 @@
   },
   "today": "Today",
   "bank_holiday": "Bank Holiday",
+  "today_movie": "Tonight's movie at 19:00:",
+  "today_movie_nope": "No movie scheduled for tonight",
   "work_today": "Appointment time today:",
   "week": {
     "monday": "Monday",
