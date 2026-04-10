@@ -65,14 +65,7 @@
         >
           <i class="mdi mdi-close text-3xl"></i>
         </button>
-        <iframe
-          id="yt-player"
-          :src="embedUrl"
-          class="w-full h-full"
-          frameborder="0"
-          allow="autoplay; encrypted-media"
-          allowfullscreen
-        ></iframe>
+        <div id="yt-player" class="w-full h-full"></div>
       </div>
     </div>
 </template>
@@ -123,7 +116,7 @@ const schedulePath = url.searchParams.get("schedule")
 
 const { scheduleData, fetchSchedule } = useSchedule(schedulePath)
 const {
-  showMovieModal, movieTitle, embedUrl,
+  showMovieModal, movieTitle,
   openMovie, closeMovie, initPlayer, checkMovieTime,
 } = useMoviePlayer(scheduleData)
 

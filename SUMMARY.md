@@ -84,13 +84,16 @@ The autostart `.desktop` method is the active and recommended approach.
 
 ```bash
 #!/bin/bash
-# pivotPanel.sh
+# pivotPanel.sh - Full kiosk-ready version
 
-URL="https://doihaveinternet.com/"
-
+URL="https://r4nd3l.github.io/pivotPanel/?schedule=https://demo8918966.mockable.io/plan_2026"
 CHROMIUM_BIN=$(command -v chromium || command -v chromium-browser)
 
-# Wait for Wayland socket
+# Set a transparent cursor to hide it (Wayland-compatible)
+export XCURSOR_THEME=blank
+export XCURSOR_SIZE=1
+
+# Wait for Wayland socket to appear (ensure compositor is ready)
 for i in {1..30}; do
     SOCKET=$(ls /run/user/$UID/wayland-* 2>/dev/null | head -n1)
     if [ -S "$SOCKET" ]; then
@@ -98,18 +101,23 @@ for i in {1..30}; do
         export XDG_RUNTIME_DIR="/run/user/$UID"
         break
     fi
-    sleep 2
+    sleep 1
 done
 
-sleep 3  # compositor stabilization
+# Give compositor extra time to settle
+sleep 5
 
+# Launch Chromium in kiosk mode
 "$CHROMIUM_BIN" --enable-features=UseOzonePlatform \
                  --ozone-platform=wayland \
                  --kiosk "$URL" \
                  --noerrdialogs \
                  --disable-infobars \
                  --password-store=basic \
-                 --disable-session-crashed-bubble &
+                 --disable-session-crashed-bubble \
+                 --disable-application-cache \
+                 --enable-dark-mode \
+                 --autoplay-policy=no-user-gesture-required &
 ```
 
 ---

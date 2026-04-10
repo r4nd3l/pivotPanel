@@ -24,11 +24,9 @@ export default function useMoviePlayer(scheduleData) {
   const movieTitle = computed(() => todayEntry.value?.movie_title?.trim() || '')
   const movieLink = computed(() => todayEntry.value?.movie_link?.trim() || '')
 
-  const embedUrl = computed(() => {
+  const videoId = computed(() => {
     const link = movieLink.value
-    if (!link) return ''
-    const id = extractVideoId(link)
-    return id ? `https://www.youtube.com/embed/${id}?enablejsapi=1&autoplay=1&rel=0&vq=large` : ''
+    return link ? extractVideoId(link) : ''
   })
 
   /**
@@ -75,17 +73,22 @@ export default function useMoviePlayer(scheduleData) {
   const PREFERRED_QUALITY = 'large'
 
   /**
-   * Initialize the YT player on a given iframe element.
-   * Call this from the component after the iframe is mounted.
-   * @param {string} iframeId - DOM id of the iframe element
+   * Initialize the YT player inside a container element.
+   * The API replaces the div with its own iframe for full control.
+   * @param {string} elementId - DOM id of the container div
    */
-  async function initPlayer(iframeId) {
+  async function initPlayer(elementId) {
     await loadYouTubeApi()
     if (player.value) {
       player.value.destroy()
       player.value = null
     }
-    player.value = new window.YT.Player(iframeId, {
+    const id = videoId.value
+    if (!id) return
+    player.value = new window.YT.Player(elementId, {
+      videoId: id,
+      width: '100%',
+      height: '100%',
       playerVars: {
         autoplay: 1,
         rel: 0,
@@ -99,6 +102,7 @@ export default function useMoviePlayer(scheduleData) {
       events: {
         onReady: (event) => {
           event.target.setPlaybackQuality(PREFERRED_QUALITY)
+          event.target.playVideo()
         },
         onPlaybackQualityChange: (event) => {
           if (event.data !== PREFERRED_QUALITY) {
@@ -115,7 +119,7 @@ export default function useMoviePlayer(scheduleData) {
   }
 
   function openMovie() {
-    if (!embedUrl.value) return
+    if (!videoId.value) return
     showMovieModal.value = true
   }
 
@@ -150,7 +154,6 @@ export default function useMoviePlayer(scheduleData) {
     showMovieModal,
     movieTitle,
     movieLink,
-    embedUrl,
     openMovie,
     closeMovie,
     initPlayer,
