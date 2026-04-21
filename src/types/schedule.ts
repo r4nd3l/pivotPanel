@@ -1,4 +1,13 @@
 /**
+ * A scheduled movie entry
+ */
+export interface Movie {
+  time: string
+  title: string
+  link: string
+}
+
+/**
  * Calendar day entry from the schedule API
  */
 export interface CalendarDay {
@@ -10,7 +19,8 @@ export interface CalendarDay {
   week_type: string
   type: string
   bank_holiday: string
-  work: string // "yes" or "no"
+  work?: string
+  movies?: Movie[]
 }
 
 /**

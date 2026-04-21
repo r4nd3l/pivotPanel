@@ -19,20 +19,23 @@
                   {{ currentTime }}
                 </h3>
               </div>
-              <div v-if="movieTitle" class="flex flex-col items-center justify-between w-full bg-white dark:bg-gray-800 rounded-xl px-6 py-4 shadow-md gap-3">
+              <div v-if="hasMovies" class="flex flex-col items-center justify-between w-full bg-white dark:bg-gray-800 rounded-xl px-6 py-4 shadow-md gap-3">
                 <div class="flex flex-row items-center justify-center w-full">
                   <i class="mdi mdi-television-classic text-5xl text-indigo-600 dark:text-indigo-400 mr-4 shrink-0"></i>
                   <p class="text-4xl font-semibold text-gray-700 dark:text-gray-200 m-0 wrap-break-word">
                     {{ t("today_movie") }} 
                   </p>
                 </div>
-                <button
-                  type="button"
-                  class="text-4xl font-semibold text-indigo-600 dark:text-indigo-300 m-0 wrap-break-word underline decoration-2 underline-offset-4 hover:text-indigo-800 dark:hover:text-indigo-100 transition-colors cursor-pointer bg-transparent border-none p-0"
-                  @click="openMovie"
-                >
-                  {{ movieTitle }}
-                </button>
+                <div v-for="(movie, index) in movies" :key="index" class="flex flex-row items-center justify-center gap-3 w-full">
+                  <span class="text-3xl font-mono font-bold text-indigo-400 dark:text-indigo-300 shrink-0">{{ movie.time }}</span>
+                  <button
+                    type="button"
+                    class="text-3xl font-semibold text-indigo-600 dark:text-indigo-300 m-0 wrap-break-word underline decoration-2 underline-offset-4 hover:text-indigo-800 dark:hover:text-indigo-100 transition-colors cursor-pointer bg-transparent border-none p-0 text-left"
+                    @click="openMovie(index)"
+                  >
+                    {{ movie.title }}
+                  </button>
+                </div>
               </div>
               <div v-else class="flex flex-row items-center justify-center w-full bg-white dark:bg-gray-800 rounded-xl px-6 py-4 shadow-md gap-3">
                 <i class="mdi mdi-television-off text-5xl text-gray-400 dark:text-gray-500 shrink-0"></i>
@@ -116,7 +119,7 @@ const schedulePath = url.searchParams.get("schedule")
 
 const { scheduleData, fetchSchedule } = useSchedule(schedulePath)
 const {
-  showMovieModal, movieTitle,
+  showMovieModal, movies, hasMovies,
   openMovie, closeMovie, initPlayer, checkMovieTime,
 } = useMoviePlayer(scheduleData)
 

@@ -1,15 +1,18 @@
 import { ref, computed, onUnmounted } from 'vue'
 import { getCurrentDateString } from '../utils/dateUtils.js'
 /** @typedef {import('../types/schedule.js').ScheduleApiResponse} ScheduleApiResponse */
+/** @typedef {import('../types/schedule.js').Movie} Movie */
 
 /**
  * Composable for managing movie playback with YouTube IFrame API.
- * Supports auto-trigger at 19:00 and manual start via click.
+ * Supports multiple movies per day, each with its own scheduled time.
  * @param {import('vue').Ref<ScheduleApiResponse | null>} scheduleData
  */
 export default function useMoviePlayer(scheduleData) {
   const showMovieModal = ref(false)
-  const movieTriggered = ref(false)
+  const currentMovieIndex = ref(-1)
+  /** @type {import('vue').Ref<Set<number>>} */
+  const triggeredIndices = ref(new Set())
   /** @type {import('vue').Ref<YT.Player | null>} */
   const player = ref(null)
   let apiReady = false
@@ -21,16 +24,22 @@ export default function useMoviePlayer(scheduleData) {
     return scheduleData.value.calendar.find((d) => d.date === currentDate) ?? null
   })
 
-  const movieTitle = computed(() => todayEntry.value?.movie_title?.trim() || '')
-  const movieLink = computed(() => todayEntry.value?.movie_link?.trim() || '')
+  /** @type {import('vue').ComputedRef<Movie[]>} */
+  const movies = computed(() => {
+    const entry = todayEntry.value
+    if (!entry?.movies?.length) return []
+    return entry.movies.filter((m) => m.title?.trim() && m.link?.trim())
+  })
 
-  const videoId = computed(() => {
-    const link = movieLink.value
-    return link ? extractVideoId(link) : ''
+  const hasMovies = computed(() => movies.value.length > 0)
+
+  const currentMovie = computed(() => {
+    const idx = currentMovieIndex.value
+    if (idx < 0 || idx >= movies.value.length) return null
+    return movies.value[idx]
   })
 
   /**
-   * Extract YouTube video ID from various URL formats
    * @param {string} url
    * @returns {string}
    */
@@ -74,7 +83,7 @@ export default function useMoviePlayer(scheduleData) {
 
   /**
    * Initialize the YT player inside a container element.
-   * The API replaces the div with its own iframe for full control.
+   * Uses the currently selected movie's video ID.
    * @param {string} elementId - DOM id of the container div
    */
   async function initPlayer(elementId) {
@@ -83,7 +92,9 @@ export default function useMoviePlayer(scheduleData) {
       player.value.destroy()
       player.value = null
     }
-    const id = videoId.value
+    const movie = currentMovie.value
+    if (!movie) return
+    const id = extractVideoId(movie.link)
     if (!id) return
     player.value = new window.YT.Player(elementId, {
       videoId: id,
@@ -118,8 +129,13 @@ export default function useMoviePlayer(scheduleData) {
     })
   }
 
-  function openMovie() {
-    if (!videoId.value) return
+  /**
+   * Open a specific movie by its index in the movies array.
+   * @param {number} index
+   */
+  function openMovie(index) {
+    if (index < 0 || index >= movies.value.length) return
+    currentMovieIndex.value = index
     showMovieModal.value = true
   }
 
@@ -130,19 +146,30 @@ export default function useMoviePlayer(scheduleData) {
       player.value = null
     }
     showMovieModal.value = false
+    currentMovieIndex.value = -1
   }
 
   /**
-   * Call from the 1-second interval to auto-trigger at 19:00.
-   * Only triggers once per session.
+   * Called every second from the interval timer.
+   * Checks each movie's scheduled time and auto-triggers if it matches now.
+   * Each movie only triggers once per session.
    */
   function checkMovieTime() {
-    if (movieTriggered.value || showMovieModal.value) return
-    if (!movieLink.value) return
+    if (showMovieModal.value) return
+    if (!movies.value.length) return
     const now = new Date()
-    if (now.getHours() === 19 && now.getMinutes() === 0) {
-      movieTriggered.value = true
-      openMovie()
+    const nowHours = now.getHours()
+    const nowMinutes = now.getMinutes()
+
+    for (let i = 0; i < movies.value.length; i++) {
+      if (triggeredIndices.value.has(i)) continue
+      const movie = movies.value[i]
+      const [h, m] = movie.time.split(':').map(Number)
+      if (nowHours === h && nowMinutes === m) {
+        triggeredIndices.value.add(i)
+        openMovie(i)
+        return
+      }
     }
   }
 
@@ -152,8 +179,9 @@ export default function useMoviePlayer(scheduleData) {
 
   return {
     showMovieModal,
-    movieTitle,
-    movieLink,
+    movies,
+    hasMovies,
+    currentMovie,
     openMovie,
     closeMovie,
     initPlayer,
