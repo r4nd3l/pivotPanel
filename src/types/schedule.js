@@ -6,8 +6,10 @@
  * A scheduled movie entry
  * @typedef {Object} Movie
  * @property {string} time - Scheduled playback time in "HH:MM" format (e.g. "14:00", "19:00")
- * @property {string} title - Movie title (e.g. "Poirot-18_2.évad 7.epizód")
- * @property {string} link - YouTube link (e.g. "https://www.youtube.com/watch?v=abcd1234")
+ * @property {string} title - Movie/channel title
+ * @property {string} link - YouTube or famelack.com URL
+ * @property {'youtube'|'live'} [type] - Entry type; omit or 'youtube' for YouTube, 'live' for a live TV stream
+ * @property {string} [end_time] - HH:MM auto-close time; only present on 'live' entries
  */
 
 /**

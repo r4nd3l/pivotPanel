@@ -25,5 +25,10 @@
   },
   "week_even": "even",
   "week_odd": "odd",
-  "loading": "Loading data…"
+  "today_now_is": "is",
+  "loading": "Loading data…",
+  "live_loading": "Loading channel...",
+  "live_unavailable": "Channel is currently unavailable.",
+  "live_retry": "Retrying in {n} seconds...",
+  "live_retry_now": "Retry now"
 }

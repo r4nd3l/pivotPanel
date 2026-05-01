@@ -5,6 +5,10 @@ export interface Movie {
   time: string
   title: string
   link: string
+  /** 'live' for a famelack TV stream, omit or 'youtube' for a YouTube video */
+  type?: 'youtube' | 'live'
+  /** HH:MM – only present on live entries; the time the stream auto-closes */
+  end_time?: string
 }
 
 /**

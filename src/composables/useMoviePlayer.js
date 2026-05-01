@@ -151,15 +151,29 @@ export default function useMoviePlayer(scheduleData) {
 
   /**
    * Called every second from the interval timer.
-   * Checks each movie's scheduled time and auto-triggers if it matches now.
+   * For live streams: auto-closes the modal when end_time is reached.
+   * For all types: auto-triggers a movie when its scheduled time matches now.
    * Each movie only triggers once per session.
    */
   function checkMovieTime() {
-    if (showMovieModal.value) return
     if (!movies.value.length) return
     const now = new Date()
     const nowHours = now.getHours()
     const nowMinutes = now.getMinutes()
+
+    // Auto-close a live stream at its end_time
+    if (showMovieModal.value && currentMovie.value?.type === 'live') {
+      const endTime = currentMovie.value.end_time
+      if (endTime) {
+        const [endH, endM] = endTime.split(':').map(Number)
+        if (nowHours === endH && nowMinutes === endM) {
+          closeMovie()
+        }
+      }
+      return
+    }
+
+    if (showMovieModal.value) return
 
     for (let i = 0; i < movies.value.length; i++) {
       if (triggeredIndices.value.has(i)) continue
@@ -187,4 +201,5 @@ export default function useMoviePlayer(scheduleData) {
     initPlayer,
     checkMovieTime,
   }
+
 }

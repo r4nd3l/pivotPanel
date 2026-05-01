@@ -68,7 +68,14 @@
         >
           <i class="mdi mdi-close text-3xl"></i>
         </button>
-        <div id="yt-player" class="w-full h-full"></div>
+        <!-- Live TV stream -->
+        <LiveTvPlayer
+          v-if="currentMovie?.type === 'live'"
+          :movie="currentMovie"
+          class="w-full h-full"
+        />
+        <!-- YouTube video -->
+        <div v-else id="yt-player" class="w-full h-full"></div>
       </div>
     </div>
 </template>
@@ -79,6 +86,7 @@ import { useRouter, useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import WeekDisplay from '../components/WeekDisplay.vue'
 import ToggleSwitches from '../components/ToggleSwitches.vue'
+import LiveTvPlayer from '../components/LiveTvPlayer.vue'
 import useTimePhase from '../composables/useTimePhase.js'
 import useSchedule from '../composables/useSchedule.js'
 import useMoviePlayer from '../composables/useMoviePlayer.js'
@@ -119,12 +127,12 @@ const schedulePath = url.searchParams.get("schedule")
 
 const { scheduleData, fetchSchedule } = useSchedule(schedulePath)
 const {
-  showMovieModal, movies, hasMovies,
+  showMovieModal, movies, hasMovies, currentMovie,
   openMovie, closeMovie, initPlayer, checkMovieTime,
 } = useMoviePlayer(scheduleData)
 
 watch(showMovieModal, async (visible) => {
-  if (visible) {
+  if (visible && currentMovie.value?.type !== 'live') {
     await nextTick()
     initPlayer('yt-player')
   }

@@ -29,5 +29,9 @@
   },
   "week_even": "páros",
   "week_odd": "páratlan",
-  "loading": "Adatok betöltése…"
+  "loading": "Adatok betöltése…",
+  "live_loading": "Csatorna betöltése...",
+  "live_unavailable": "A csatorna jelenleg nem elérhető.",
+  "live_retry": "Újrapróbálás {n} másodperc múlva...",
+  "live_retry_now": "Újrapróbálás most"
 }
