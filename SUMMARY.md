@@ -86,7 +86,7 @@ The autostart `.desktop` method is the active and recommended approach.
 #!/bin/bash
 # pivotPanel.sh - Full kiosk-ready version
 
-URL="https://r4nd3l.github.io/pivotPanel/?schedule=https://demo8918966.mockable.io/plan_2026"
+URL="https://r4nd3l.github.io/pivotPanel/"
 CHROMIUM_BIN=$(command -v chromium || command -v chromium-browser)
 
 # Set a transparent cursor to hide it (Wayland-compatible)

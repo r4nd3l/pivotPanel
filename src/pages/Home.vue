@@ -121,9 +121,9 @@ const updateTime = () => {
   checkMovieTime()
 }
 
-// Get schedule path from URL
+// Optional remote schedule override via ?schedule=<url>; otherwise embedded JSON is used
 const url = new URL(window.location.href)
-const schedulePath = url.searchParams.get("schedule")
+const schedulePath = url.searchParams.get('schedule')
 
 const { scheduleData, fetchSchedule } = useSchedule(schedulePath)
 const {
@@ -145,11 +145,6 @@ let timeInterval = null
 onMounted(() => {
   const currentPath = route.path
   if (currentPath !== '/' && currentPath !== '/missing') {
-    router.push("/missing")
-    return
-  }
-
-  if (!schedulePath || !schedulePath.trim()) {
     router.push("/missing")
     return
   }
