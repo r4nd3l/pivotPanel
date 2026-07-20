@@ -45,15 +45,16 @@
       controls
     ></video>
 
-    <!-- YouTube-nocookie iframe (M1 fallback) -->
+    <!-- Videa / YouTube-nocookie iframe -->
     <iframe
       v-else-if="!isHLS && iframeSrc"
       :src="iframeSrc"
       class="absolute inset-0 w-full h-full transition-opacity duration-500"
       :class="status === 'playing' ? 'opacity-100' : 'opacity-0 pointer-events-none'"
       frameborder="0"
-      allow="autoplay; fullscreen; encrypted-media"
+      allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
       allowfullscreen
+      referrerpolicy="no-referrer-when-downgrade"
       @load="onIframeLoad"
     ></iframe>
 
@@ -74,6 +75,7 @@ const props = defineProps({
 const { t } = useI18n()
 
 const IFRAME_LOAD_TIMEOUT_MS = 10_000
+const VIDEA_LOAD_TIMEOUT_MS = 20_000
 const RETRY_SECONDS = 15
 
 /** @type {import('vue').Ref<'loading'|'playing'|'error'>} */
@@ -90,6 +92,7 @@ let retryTimer = null
 let iframeLoadTimer = null
 
 const isHLS = computed(() => props.movie.link.includes('.m3u8'))
+const isVidea = computed(() => props.movie.link.includes('videa.hu/player'))
 const progressPercent = computed(
   () => ((RETRY_SECONDS - retryCountdown.value) / RETRY_SECONDS) * 100,
 )
@@ -109,7 +112,8 @@ function startLoad() {
       startHls()
     } else {
       iframeSrc.value = props.movie.link
-      iframeLoadTimer = setTimeout(onStreamError, IFRAME_LOAD_TIMEOUT_MS)
+      const timeout = isVidea.value ? VIDEA_LOAD_TIMEOUT_MS : IFRAME_LOAD_TIMEOUT_MS
+      iframeLoadTimer = setTimeout(onStreamError, timeout)
     }
   }, 80)
 }
