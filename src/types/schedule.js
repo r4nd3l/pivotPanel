@@ -7,9 +7,10 @@
  * @typedef {Object} Movie
  * @property {string} time - Scheduled playback time in "HH:MM" format (e.g. "14:00", "19:00")
  * @property {string} title - Movie/channel title
- * @property {string} link - YouTube or famelack.com URL
- * @property {'youtube'|'live'} [type] - Entry type; omit or 'youtube' for YouTube, 'live' for a live TV stream
- * @property {string} [end_time] - HH:MM auto-close time; only present on 'live' entries
+ * @property {string} link - Playable URL or external watch link (YouTube, Videa, Netflix, Max, …)
+ * @property {'youtube'|'live'|'external'|'subscription'} [type] - Player routing hint
+ * @property {string} [platform] - Display label for external services (e.g. "Netflix", "Max")
+ * @property {string} [end_time] - HH:MM auto-close time
  */
 
 /**
@@ -26,10 +27,11 @@
  * @property {string} medicine - Daily medicine reminder (e.g. "XY gyógyszer 2x1")
  * @property {string} hand_creme - Daily hand creme reminder (e.g. "Kenőcs 2x1")
  * @property {string} phone - Daily phone check reminder (e.g. "Telefon töltöttség ellőrzése!")
- * @property {string} lunch - Daily lunch time info (e.g. "11:30 - 12:30 között ebéd várható!")
- * @property {string} [work] - If present: "yes" | "no" for appointment day (API v1.2 sample omits this)
- * @property {string} [marcsi_day] - When present: message for Marcsi (e.g. "09:00-kor Marcsi, (rendrakás) várható!")
- * @property {string} [ilona_day] - When present: message for Ilona (e.g. "Délelőtt Ilona, (takarítás) várható!")
+ * @property {string} [lunch] - Weekday lunch info (e.g. "Ebéd 11:30 - 12:30 óra között várható")
+ * @property {string} [adrienn_beforenoon] - Daily Adrienn morning visit (6:00–7:00)
+ * @property {string} [adrienn_afternoon] - Daily Adrienn afternoon visit (13:00–14:00)
+ * @property {string} [ildiko] - Ildikó cleaning visit (Tuesdays)
+ * @property {string} [magdi_day] - One-off Magdi pedicure visit (2026-08-19)
  * @property {Movie[]} [movies] - Array of scheduled movies for the day
  */
 

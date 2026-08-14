@@ -33,5 +33,9 @@
   "live_loading": "Csatorna betöltése...",
   "live_unavailable": "A csatorna jelenleg nem elérhető.",
   "live_retry": "Újrapróbálás {n} másodperc múlva...",
-  "live_retry_now": "Újrapróbálás most"
+  "live_retry_now": "Újrapróbálás most",
+  "player_close": "Bezárás",
+  "external_playing_on": "Lejátszás a(z) {platform} oldalán",
+  "external_hint": "A film külön ablakban nyílt meg. A bezárás gomb leállítja és visszahozza a műsort.",
+  "external_reopen": "Megnyitás újra"
 }

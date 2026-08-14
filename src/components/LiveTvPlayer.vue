@@ -1,10 +1,10 @@
 <template>
-  <div class="relative w-full h-full bg-black flex items-center justify-center overflow-hidden">
+  <div class="relative w-full h-full bg-black flex items-center justify-center overflow-hidden pointer-events-none">
 
     <!-- Loading state -->
     <div
       v-if="status === 'loading'"
-      class="absolute inset-0 flex flex-col items-center justify-center gap-6 text-white z-10"
+      class="absolute inset-0 flex flex-col items-center justify-center gap-6 text-white z-20 pointer-events-auto"
     >
       <div class="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-blue-400"></div>
       <p class="text-3xl font-medium tracking-wide">{{ t('live_loading') }}</p>
@@ -14,7 +14,7 @@
     <!-- Error / unavailable state -->
     <div
       v-else-if="status === 'error'"
-      class="absolute inset-0 flex flex-col items-center justify-center gap-6 text-white z-10 px-12 text-center"
+      class="absolute inset-0 flex flex-col items-center justify-center gap-6 text-white z-20 px-12 text-center pointer-events-auto"
     >
       <i class="mdi mdi-wifi-off text-9xl text-red-400"></i>
       <p class="text-4xl font-semibold">{{ t('live_unavailable') }}</p>
@@ -33,24 +33,31 @@
       >
         <i class="mdi mdi-refresh mr-2"></i>{{ t('live_retry_now') }}
       </button>
+      <button
+        type="button"
+        class="mt-2 px-6 py-3 rounded-xl bg-white text-gray-900 text-xl font-bold transition-colors cursor-pointer"
+        @click="emit('close')"
+      >
+        <i class="mdi mdi-close mr-2"></i>{{ t('player_close') }}
+      </button>
     </div>
 
     <!-- HLS video player (m3u8 streams) -->
     <video
       v-if="isHLS && videoReady"
       ref="videoEl"
-      class="absolute inset-0 w-full h-full transition-opacity duration-500"
-      :class="status === 'playing' ? 'opacity-100' : 'opacity-0'"
+      class="absolute inset-0 w-full h-full object-contain bg-black transition-opacity duration-500 pointer-events-auto"
+      :class="status === 'playing' ? 'opacity-100 z-10' : 'opacity-0 z-0'"
       playsinline
+      autoplay
       controls
     ></video>
 
-    <!-- Videa / YouTube-nocookie iframe -->
+    <!-- Videa / YouTube-nocookie iframe (visible once src is set; loading overlay covers until ready) -->
     <iframe
-      v-else-if="!isHLS && iframeSrc"
+      v-if="!isHLS && iframeSrc"
       :src="iframeSrc"
-      class="absolute inset-0 w-full h-full transition-opacity duration-500"
-      :class="status === 'playing' ? 'opacity-100' : 'opacity-0 pointer-events-none'"
+      class="absolute inset-0 w-full h-full bg-black z-10 pointer-events-auto"
       frameborder="0"
       allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
       allowfullscreen
@@ -62,7 +69,7 @@
 </template>
 
 <script setup>
-import { ref, computed, nextTick, onMounted, onUnmounted } from 'vue'
+import { ref, computed, nextTick, onMounted, onUnmounted, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import Hls from 'hls.js'
 /** @typedef {import('../types/schedule.js').Movie} Movie */
@@ -72,11 +79,15 @@ const props = defineProps({
   movie: { type: Object, required: true },
 })
 
+const emit = defineEmits(['failed', 'close'])
+
 const { t } = useI18n()
 
-const IFRAME_LOAD_TIMEOUT_MS = 10_000
-const VIDEA_LOAD_TIMEOUT_MS = 20_000
+const IFRAME_LOAD_TIMEOUT_MS = 12_000
+const VIDEA_LOAD_TIMEOUT_MS = 25_000
+const VIDEA_PLAY_DELAY_MS = 1_500
 const RETRY_SECONDS = 15
+const MAX_RETRIES = 3
 
 /** @type {import('vue').Ref<'loading'|'playing'|'error'>} */
 const status = ref('loading')
@@ -90,6 +101,8 @@ const videoEl = ref(null)
 let hls = null
 let retryTimer = null
 let iframeLoadTimer = null
+let playDelayTimer = null
+let retryAttempts = 0
 
 const isHLS = computed(() => props.movie.link.includes('.m3u8'))
 const isVidea = computed(() => props.movie.link.includes('videa.hu/player'))
@@ -97,16 +110,20 @@ const progressPercent = computed(
   () => ((RETRY_SECONDS - retryCountdown.value) / RETRY_SECONDS) * 100,
 )
 
-function startLoad() {
+function clearTimers() {
   clearTimeout(iframeLoadTimer)
+  clearTimeout(playDelayTimer)
   clearInterval(retryTimer)
+}
+
+function startLoad() {
+  clearTimers()
   destroyHls()
 
   status.value = 'loading'
   videoReady.value = false
   iframeSrc.value = null
 
-  // Small delay ensures a destroyed/old iframe or video element is removed from DOM first
   setTimeout(() => {
     if (isHLS.value) {
       startHls()
@@ -122,45 +139,48 @@ async function startHls() {
   videoReady.value = true
   await nextTick()
 
-  if (!videoEl.value) {
+  const el = videoEl.value
+  if (!el) {
     onStreamError()
     return
   }
 
+  const markPlaying = () => {
+    status.value = 'playing'
+    retryAttempts = 0
+  }
+
+  el.onplaying = markPlaying
+  el.onerror = () => onStreamError()
+
   if (Hls.isSupported()) {
     hls = new Hls({ lowLatencyMode: true, enableWorker: true })
     hls.loadSource(props.movie.link)
-    hls.attachMedia(videoEl.value)
+    hls.attachMedia(el)
 
     hls.on(Hls.Events.MANIFEST_PARSED, (_, data) => {
-      // Lock quality to the level closest to 480p (without going over if possible)
       if (data.levels.length > 1) {
         const TARGET_HEIGHT = 480
         let bestIdx = 0
         let bestScore = Infinity
         data.levels.forEach((level, i) => {
           const h = level.height || 0
-          // Prefer levels at or below target; penalise levels above target heavily
           const score = h <= TARGET_HEIGHT ? TARGET_HEIGHT - h : (h - TARGET_HEIGHT) * 10
           if (score < bestScore) { bestScore = score; bestIdx = i }
         })
         hls.currentLevel = bestIdx
       }
-      status.value = 'playing'
-      videoEl.value?.play().catch(() => {})
+      el.play().catch(() => {})
     })
 
     hls.on(Hls.Events.ERROR, (_, data) => {
       if (data.fatal) onStreamError()
     })
-  } else if (videoEl.value.canPlayType('application/vnd.apple.mpegurl')) {
-    // Native HLS — Safari
-    videoEl.value.src = props.movie.link
-    videoEl.value.addEventListener('loadedmetadata', () => {
-      status.value = 'playing'
-      videoEl.value?.play().catch(() => {})
+  } else if (el.canPlayType('application/vnd.apple.mpegurl')) {
+    el.src = props.movie.link
+    el.addEventListener('loadedmetadata', () => {
+      el.play().catch(() => {})
     }, { once: true })
-    videoEl.value.addEventListener('error', onStreamError, { once: true })
   } else {
     onStreamError()
   }
@@ -168,13 +188,26 @@ async function startHls() {
 
 function onIframeLoad() {
   clearTimeout(iframeLoadTimer)
-  status.value = 'playing'
+  const delay = isVidea.value ? VIDEA_PLAY_DELAY_MS : 1_500
+  playDelayTimer = setTimeout(() => {
+    status.value = 'playing'
+    retryAttempts = 0
+  }, delay)
 }
 
 function onStreamError() {
+  clearTimers()
   destroyHls()
   videoReady.value = false
   iframeSrc.value = null
+  retryAttempts++
+
+  if (retryAttempts >= MAX_RETRIES) {
+    status.value = 'error'
+    emit('failed')
+    return
+  }
+
   status.value = 'error'
   retryCountdown.value = RETRY_SECONDS
   startRetryCountdown()
@@ -196,13 +229,21 @@ function destroyHls() {
     hls.destroy()
     hls = null
   }
+  if (videoEl.value) {
+    videoEl.value.onplaying = null
+    videoEl.value.onerror = null
+  }
 }
 
 onMounted(startLoad)
 
 onUnmounted(() => {
-  clearTimeout(iframeLoadTimer)
-  clearInterval(retryTimer)
+  clearTimers()
   destroyHls()
+})
+
+watch(() => props.movie.link, () => {
+  retryAttempts = 0
+  startLoad()
 })
 </script>

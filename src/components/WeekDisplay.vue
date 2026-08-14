@@ -22,37 +22,11 @@
 				</div>
 				<div class="w-full flex flex-col items-center justify-start gap-4 shrink-0">
 					<div
-						v-if="today.work === 'yes' && !today.bank_holiday"
-						class="flex flex-col items-center gap-3 p-6 rounded-xl bg-white/20 backdrop-blur-sm"
+						v-for="(message, index) in visitMessages"
+						:key="index"
+						class="flex flex-col items-center justify-center gap-3 p-6 rounded-xl text-center shrink-0 bg-white/20 backdrop-blur-sm w-full"
 					>
-						<div class="flex items-center gap-2 mb-1">
-							<i class="mdi mdi-check-circle text-5xl text-green-300"></i>
-							<p class="text-4xl font-bold text-white">{{ t("work_today") }}</p>
-						</div>
-						<div
-							v-if="today.week_type === t('week_even')"
-							class="text-5xl font-mono font-bold px-6 py-3 rounded-lg text-white bg-blue-600/40"
-						>
-							07:30 - 12:00
-						</div>
-						<div
-							v-if="today.week_type === t('week_odd')"
-							class="text-5xl font-mono font-bold px-6 py-3 rounded-lg text-white bg-blue-600/40"
-						>
-							12:30 - 17:00
-						</div>
-					</div>
-					<div
-						v-if="marcsiText(today)"
-						class="flex flex-col items-center justify-center gap-3 p-6 rounded-xl text-center shrink-0 bg-white/20 backdrop-blur-sm"
-					>
-						<p class="text-3xl font-semibold px-4 py-3 rounded-lg text-pretty text-white bg-blue-600/40">{{ marcsiText(today) }}</p>
-					</div>
-					<div
-						v-if="ilonaText(today)"
-						class="flex flex-col items-center justify-center gap-3 p-6 rounded-xl text-center shrink-0 bg-white/20 backdrop-blur-sm"
-					>
-						<p class="text-3xl font-semibold px-4 py-3 rounded-lg text-pretty text-white bg-blue-600/40">{{ ilonaText(today) }}</p>
+						<p class="text-3xl font-semibold px-4 py-3 rounded-lg text-pretty text-white bg-blue-600/40">{{ message }}</p>
 					</div>
 				</div>
 			</div>
@@ -95,6 +69,14 @@ const props = defineProps({
 	},
 });
 
+/** @type {readonly (keyof CalendarDay)[]} */
+const VISIT_FIELDS = [
+	"magdi_day",
+	"adrienn_beforenoon",
+	"adrienn_afternoon",
+	"ildiko",
+];
+
 /**
  * Today's calendar entry
  */
@@ -106,25 +88,16 @@ const today = computed(() => {
 	return props.data.calendar.find((day) => day.date === currentDate) ?? null;
 });
 
-/**
- * @param {CalendarDay} day
- * @returns {string}
- */
-const marcsiText = (day) => {
-	if (!day || typeof day !== "object") return "";
-	const v = day["marcsi_day"] ?? "";
-	return typeof v === "string" ? v.trim() : "";
-};
-
-/**
- * @param {CalendarDay} day
- * @returns {string}
- */
-const ilonaText = (day) => {
-	if (!day || typeof day !== "object") return "";
-	const v = day["ilona_day"] ?? "";
-	return typeof v === "string" ? v.trim() : "";
-};
+const visitMessages = computed(() => {
+	const day = today.value;
+	if (!day) return [];
+	return VISIT_FIELDS
+		.map((field) => {
+			const value = day[field];
+			return typeof value === "string" ? value.trim() : "";
+		})
+		.filter(Boolean);
+});
 
 /**
  * Format date in Hungarian format: "Feb. 14."

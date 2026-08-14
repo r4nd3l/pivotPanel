@@ -30,5 +30,9 @@
   "live_loading": "Loading channel...",
   "live_unavailable": "Channel is currently unavailable.",
   "live_retry": "Retrying in {n} seconds...",
-  "live_retry_now": "Retry now"
+  "live_retry_now": "Retry now",
+  "player_close": "Close",
+  "external_playing_on": "Playing on {platform}",
+  "external_hint": "The title opened in a separate window. Close stops playback and returns to the schedule.",
+  "external_reopen": "Open again"
 }

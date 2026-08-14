@@ -58,24 +58,50 @@
       <!-- Full-screen movie modal -->
       <div
         v-if="showMovieModal"
-        class="fixed inset-0 z-50 flex items-center justify-center bg-black"
+        class="fixed inset-0 z-50 bg-black"
       >
-        <button
-          type="button"
-          class="absolute top-4 right-4 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/40 text-white shadow-lg cursor-pointer transition-colors"
-          @click="closeMovie"
-          aria-label="Close"
-        >
-          <i class="mdi mdi-close text-3xl"></i>
-        </button>
-        <!-- Live TV stream -->
-        <LiveTvPlayer
-          v-if="currentMovie?.type === 'live'"
-          :movie="currentMovie"
-          class="w-full h-full"
-        />
-        <!-- YouTube video -->
-        <div v-else id="yt-player" class="w-full h-full"></div>
+        <!-- Player layer (below controls) -->
+        <div class="absolute inset-0 z-0">
+          <ExternalPlayer
+            v-if="usesExternalPlayer"
+            :movie="currentMovie"
+            :platform-label="externalPlatformLabel"
+            :window-closed="externalWindowClosed"
+            @reopen="reopenExternalWindow"
+          />
+          <LiveTvPlayer
+            v-else-if="usesStreamPlayer"
+            :key="currentMovie?.link"
+            :movie="currentMovie"
+            class="w-full h-full"
+            @failed="closeMovie"
+            @close="closeMovie"
+          />
+          <template v-else-if="usesYouTubePlayer">
+            <div
+              v-if="!playerReady"
+              class="absolute inset-0 flex flex-col items-center justify-center gap-6 text-white z-20"
+            >
+              <div class="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-blue-400"></div>
+              <p class="text-3xl font-medium">{{ t('live_loading') }}</p>
+              <p class="text-xl text-gray-400">{{ currentMovie?.title }}</p>
+            </div>
+            <div id="yt-player" class="w-full h-full"></div>
+          </template>
+        </div>
+
+        <!-- Always on top — iframes cannot cover this -->
+        <div class="absolute top-0 left-0 right-0 z-[100] flex justify-end p-4 pointer-events-none">
+          <button
+            type="button"
+            class="pointer-events-auto flex items-center gap-3 px-6 py-4 rounded-2xl bg-white text-gray-900 shadow-2xl border-4 border-gray-200 cursor-pointer transition-transform hover:scale-105 active:scale-95"
+            @click="closeMovie"
+            aria-label="Close"
+          >
+            <i class="mdi mdi-close text-4xl leading-none"></i>
+            <span class="text-2xl font-bold">{{ t('player_close') }}</span>
+          </button>
+        </div>
       </div>
     </div>
 </template>
@@ -87,6 +113,7 @@ import { useI18n } from 'vue-i18n'
 import WeekDisplay from '../components/WeekDisplay.vue'
 import ToggleSwitches from '../components/ToggleSwitches.vue'
 import LiveTvPlayer from '../components/LiveTvPlayer.vue'
+import ExternalPlayer from '../components/ExternalPlayer.vue'
 import useTimePhase from '../composables/useTimePhase.js'
 import useSchedule from '../composables/useSchedule.js'
 import useMoviePlayer from '../composables/useMoviePlayer.js'
@@ -128,11 +155,14 @@ const schedulePath = url.searchParams.get('schedule')
 const { scheduleData, fetchSchedule } = useSchedule(schedulePath)
 const {
   showMovieModal, movies, hasMovies, currentMovie,
-  openMovie, closeMovie, initPlayer, checkMovieTime,
+  usesStreamPlayer, usesYouTubePlayer, usesExternalPlayer,
+  externalPlatformLabel, externalWindowClosed,
+  playerReady,
+  openMovie, closeMovie, reopenExternalWindow, initPlayer, checkMovieTime, tryResumeCurrentSlot,
 } = useMoviePlayer(scheduleData)
 
 watch(showMovieModal, async (visible) => {
-  if (visible && currentMovie.value?.type !== 'live') {
+  if (visible && usesYouTubePlayer.value) {
     await nextTick()
     initPlayer('yt-player')
   }
@@ -153,7 +183,9 @@ onMounted(() => {
     minimumLoadTimePassed.value = true
   }, 3000)
 
-  fetchSchedule()
+  fetchSchedule().then(() => {
+    tryResumeCurrentSlot()
+  })
 
   updateTime()
   timeInterval = setInterval(updateTime, 1000)

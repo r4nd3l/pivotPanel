@@ -1,7 +1,49 @@
 import { ref, computed, onUnmounted } from 'vue'
 import { getCurrentDateString } from '../utils/dateUtils.js'
+import { getPlayerMode, getPlatformLabel } from '../utils/moviePlayerMode.js'
 /** @typedef {import('../types/schedule.js').ScheduleApiResponse} ScheduleApiResponse */
 /** @typedef {import('../types/schedule.js').Movie} Movie */
+
+/**
+ * @param {string} time - HH:MM
+ * @returns {number} minutes since midnight
+ */
+function toMinutes(time) {
+  const [h, m] = time.split(':').map(Number)
+  return h * 60 + m
+}
+
+/** @type {Window|null} */
+let externalWindow = null
+
+/**
+ * @param {Movie} movie
+ */
+function launchExternalWindow(movie) {
+  closeExternalWindow()
+  const features = `noopener,noreferrer,width=${window.screen.availWidth},height=${window.screen.availHeight},left=0,top=0`
+  externalWindow = window.open(movie.link, 'pivotpanel-external', features)
+  if (externalWindow) {
+    externalWindow.focus()
+    return
+  }
+  window.location.assign(movie.link)
+}
+
+function closeExternalWindow() {
+  if (externalWindow && !externalWindow.closed) {
+    try {
+      externalWindow.close()
+    } catch {
+      /* ignore */
+    }
+  }
+  externalWindow = null
+}
+
+function isExternalWindowOpen() {
+  return Boolean(externalWindow && !externalWindow.closed)
+}
 
 /**
  * Composable for managing movie playback with YouTube IFrame API.
@@ -15,8 +57,13 @@ export default function useMoviePlayer(scheduleData) {
   const triggeredIndices = ref(new Set())
   /** @type {import('vue').Ref<YT.Player | null>} */
   const player = ref(null)
+  const playerReady = ref(false)
+  /** @type {import('vue').Ref<boolean>} */
+  const scheduleTriggered = ref(false)
+  const externalWindowClosed = ref(false)
   let apiReady = false
   let apiLoading = false
+  let externalPollTimer = null
 
   const todayEntry = computed(() => {
     if (!scheduleData.value?.calendar?.length) return null
@@ -38,6 +85,29 @@ export default function useMoviePlayer(scheduleData) {
     if (idx < 0 || idx >= movies.value.length) return null
     return movies.value[idx]
   })
+
+  const playerMode = computed(() => getPlayerMode(currentMovie.value))
+
+  const usesStreamPlayer = computed(() => playerMode.value === 'stream')
+
+  const usesYouTubePlayer = computed(() => playerMode.value === 'youtube')
+
+  const usesExternalPlayer = computed(() => playerMode.value === 'external')
+
+  const externalPlatformLabel = computed(() => getPlatformLabel(currentMovie.value))
+
+  function startExternalPoll() {
+    clearInterval(externalPollTimer)
+    externalPollTimer = setInterval(() => {
+      externalWindowClosed.value = !isExternalWindowOpen()
+    }, 1000)
+  }
+
+  function stopExternalPoll() {
+    clearInterval(externalPollTimer)
+    externalPollTimer = null
+    externalWindowClosed.value = false
+  }
 
   /**
    * @param {string} url
@@ -83,10 +153,10 @@ export default function useMoviePlayer(scheduleData) {
 
   /**
    * Initialize the YT player inside a container element.
-   * Uses the currently selected movie's video ID.
    * @param {string} elementId - DOM id of the container div
    */
   async function initPlayer(elementId) {
+    playerReady.value = false
     await loadYouTubeApi()
     if (player.value) {
       player.value.destroy()
@@ -104,7 +174,7 @@ export default function useMoviePlayer(scheduleData) {
         autoplay: 1,
         rel: 0,
         modestbranding: 1,
-        controls: 0,
+        controls: 1,
         fs: 0,
         iv_load_policy: 3,
         disablekb: 1,
@@ -114,6 +184,7 @@ export default function useMoviePlayer(scheduleData) {
         onReady: (event) => {
           event.target.setPlaybackQuality(PREFERRED_QUALITY)
           event.target.playVideo()
+          playerReady.value = true
         },
         onPlaybackQualityChange: (event) => {
           if (event.data !== PREFERRED_QUALITY) {
@@ -121,6 +192,9 @@ export default function useMoviePlayer(scheduleData) {
           }
         },
         onStateChange: (event) => {
+          if (event.data === window.YT.PlayerState.PLAYING) {
+            playerReady.value = true
+          }
           if (event.data === window.YT.PlayerState.ENDED) {
             closeMovie()
           }
@@ -129,46 +203,77 @@ export default function useMoviePlayer(scheduleData) {
     })
   }
 
+  function reopenExternalWindow() {
+    const movie = currentMovie.value
+    if (!movie) return
+    launchExternalWindow(movie)
+    externalWindowClosed.value = false
+    startExternalPoll()
+  }
+
   /**
-   * Open a specific movie by its index in the movies array.
    * @param {number} index
+   * @param {{ fromSchedule?: boolean }} [options]
    */
-  function openMovie(index) {
+  function openMovie(index, options = {}) {
     if (index < 0 || index >= movies.value.length) return
+    const movie = movies.value[index]
+    scheduleTriggered.value = options.fromSchedule === true
+    playerReady.value = false
     currentMovieIndex.value = index
     showMovieModal.value = true
+
+    if (getPlayerMode(movie) === 'external') {
+      launchExternalWindow(movie)
+      startExternalPoll()
+    }
   }
 
   function closeMovie() {
+    stopExternalPoll()
+    closeExternalWindow()
     if (player.value) {
       try { player.value.stopVideo() } catch { /* ignore */ }
       try { player.value.destroy() } catch { /* ignore */ }
       player.value = null
     }
+    playerReady.value = false
+    scheduleTriggered.value = false
     showMovieModal.value = false
     currentMovieIndex.value = -1
   }
 
   /**
-   * Called every second from the interval timer.
-   * For live streams: auto-closes the modal when end_time is reached.
-   * For all types: auto-triggers a movie when its scheduled time matches now.
-   * Each movie only triggers once per session.
+   * Resume the current time slot if the page loads mid-program.
    */
+  function tryResumeCurrentSlot() {
+    if (showMovieModal.value || !movies.value.length) return
+    const nowMins = toMinutes(
+      `${String(new Date().getHours()).padStart(2, '0')}:${String(new Date().getMinutes()).padStart(2, '0')}`,
+    )
+    for (let i = 0; i < movies.value.length; i++) {
+      if (triggeredIndices.value.has(i)) continue
+      const movie = movies.value[i]
+      const start = toMinutes(movie.time)
+      const end = movie.end_time ? toMinutes(movie.end_time) : start + 120
+      if (nowMins >= start && nowMins < end) {
+        triggeredIndices.value.add(i)
+        openMovie(i, { fromSchedule: true })
+        return
+      }
+    }
+  }
+
   function checkMovieTime() {
     if (!movies.value.length) return
     const now = new Date()
     const nowHours = now.getHours()
     const nowMinutes = now.getMinutes()
 
-    // Auto-close a live stream at its end_time
-    if (showMovieModal.value && currentMovie.value?.type === 'live') {
-      const endTime = currentMovie.value.end_time
-      if (endTime) {
-        const [endH, endM] = endTime.split(':').map(Number)
-        if (nowHours === endH && nowMinutes === endM) {
-          closeMovie()
-        }
+    if (showMovieModal.value && scheduleTriggered.value && currentMovie.value?.end_time) {
+      const [endH, endM] = currentMovie.value.end_time.split(':').map(Number)
+      if (nowHours > endH || (nowHours === endH && nowMinutes >= endM)) {
+        closeMovie()
       }
       return
     }
@@ -181,7 +286,7 @@ export default function useMoviePlayer(scheduleData) {
       const [h, m] = movie.time.split(':').map(Number)
       if (nowHours === h && nowMinutes === m) {
         triggeredIndices.value.add(i)
-        openMovie(i)
+        openMovie(i, { fromSchedule: true })
         return
       }
     }
@@ -196,10 +301,17 @@ export default function useMoviePlayer(scheduleData) {
     movies,
     hasMovies,
     currentMovie,
+    usesStreamPlayer,
+    usesYouTubePlayer,
+    usesExternalPlayer,
+    externalPlatformLabel,
+    externalWindowClosed,
+    playerReady,
     openMovie,
     closeMovie,
+    reopenExternalWindow,
     initPlayer,
     checkMovieTime,
+    tryResumeCurrentSlot,
   }
-
 }

@@ -5,9 +5,9 @@ export interface Movie {
   time: string
   title: string
   link: string
-  /** 'live' for a famelack TV stream, omit or 'youtube' for a YouTube video */
-  type?: 'youtube' | 'live'
-  /** HH:MM – only present on live entries; the time the stream auto-closes */
+  type?: 'youtube' | 'live' | 'external' | 'subscription'
+  platform?: string
+  /** HH:MM – auto-close time for live/external slots */
   end_time?: string
 }
 
@@ -23,7 +23,14 @@ export interface CalendarDay {
   week_type: string
   type: string
   bank_holiday: string
-  work?: string
+  medicine?: string
+  hand_creme?: string
+  phone?: string
+  lunch?: string
+  adrienn_afternoon?: string
+  adrienn_beforenoon?: string
+  ildiko?: string
+  magdi_day?: string
   movies?: Movie[]
 }
 
@@ -36,4 +43,3 @@ export interface ScheduleApiResponse {
   data_end: string
   calendar: CalendarDay[]
 }
-
