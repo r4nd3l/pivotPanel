@@ -11,6 +11,7 @@
  * @property {'youtube'|'live'|'external'|'subscription'} [type] - Player routing hint
  * @property {string} [platform] - Display label for external services (e.g. "Netflix", "Max")
  * @property {string} [end_time] - HH:MM auto-close time
+ * @property {string[]} [fallback_links] - Backup URLs tried if primary fails pre-flight or playback
  */
 
 /**

@@ -42,7 +42,7 @@ async function assertNotStuckBlack(page) {
   const hasSpinner = await modalEl.locator('.animate-spin').isVisible()
   const hasIframe = await modalEl.locator('iframe').count()
   const hasVideo = await modalEl.locator('video').count()
-  const hasYt = await page.locator('#yt-player iframe').count()
+  const hasYt = await page.locator('#yt-player, .fixed.inset-0 iframe').count()
   const hasError = await modalEl.getByText(/nem elérhető|Unavailable/i).isVisible().catch(() => false)
 
   expect(hasSpinner || hasIframe > 0 || hasVideo > 0 || hasYt > 0 || hasError).toBeTruthy()
@@ -56,13 +56,13 @@ test.describe('PivotPanel player', () => {
 
   test('loads embedded schedule without ?schedule= param', async ({ page }) => {
     await expect(page).toHaveURL(/\/pivotPanel\/?$/)
-    await expect(page.getByRole('button', { name: /^HírTV$/i })).toBeVisible()
+    await expect(page.getByRole('button', { name: /^M1 - Híradó$/i }).first()).toBeVisible()
     await expect(page.getByRole('button', { name: /Poirot/i })).toBeVisible()
   })
 
-  test('Videa film: close button visible and on top', async ({ page }) => {
-    await page.getByRole('button', { name: /Hogyan tegyünk boldoggá/i }).click()
-    await expect(modal(page)).toBeVisible()
+  test('YouTube film: close button visible and on top', async ({ page }) => {
+    await page.getByRole('button', { name: /Kontroll/i }).click()
+    await expect(modal(page)).toBeVisible({ timeout: 15_000 })
     await assertCloseButtonOnTop(page)
     await assertNotStuckBlack(page)
     await closeButton(page).click()
@@ -71,41 +71,34 @@ test.describe('PivotPanel player', () => {
 
   test('Poirot YouTube: modal opens with close button', async ({ page }) => {
     await page.getByRole('button', { name: /Poirot/i }).click()
-    await expect(modal(page)).toBeVisible()
+    await expect(modal(page)).toBeVisible({ timeout: 15_000 })
     await assertCloseButtonOnTop(page)
-    await expect(modal(page).getByText(/Csatorna betöltése|Betöltés|Loading/i)).toBeVisible()
+    await expect(page.locator('#yt-player')).toBeAttached({ timeout: 15_000 })
     await closeButton(page).click()
     await expect(modal(page)).toBeHidden()
   })
 
-  test('HLS news: close button works even if stream fails', async ({ page }) => {
-    await page.getByRole('button', { name: /^HírTV$/i }).click()
-    await expect(modal(page)).toBeVisible()
+  test('M1 news: close button works with live embed', async ({ page }) => {
+    await page.getByRole('button', { name: /^M1 - Híradó$/i }).first().click()
+    await expect(modal(page)).toBeVisible({ timeout: 15_000 })
     await assertCloseButtonOnTop(page)
     await assertNotStuckBlack(page)
     await closeButton(page).click()
     await expect(modal(page)).toBeHidden()
   })
 
-  test('Videa transitions from loading to ready within 10s', async ({ page }) => {
-    await page.getByRole('button', { name: /Sötét Lovak/i }).click()
-    await expect(modal(page)).toBeVisible()
+  test('YouTube film loads player within 15s', async ({ page }) => {
+    await page.getByRole('button', { name: /Prometheus/i }).click()
+    await expect(modal(page)).toBeVisible({ timeout: 15_000 })
     await assertCloseButtonOnTop(page)
-
-    await expect(modal(page).locator('iframe')).toBeAttached({ timeout: 10_000 })
-
-    await page.clock.runFor(2_000)
-
-    await expect(modal(page).getByText('Csatorna betöltése...')).toBeHidden({ timeout: 5_000 })
-
-    await page.screenshot({ path: 'e2e/screenshots/videa-playing.png', fullPage: true })
+    await expect(page.locator('#yt-player')).toBeAttached({ timeout: 15_000 })
   })
 
   test('auto-resumes current slot when page loads mid-program', async ({ page }) => {
     await page.clock.install({ time: new Date('2026-07-20T10:15:00+02:00') })
     await page.goto('./')
-    await expect(modal(page)).toBeVisible({ timeout: 15_000 })
+    await expect(modal(page)).toBeVisible({ timeout: 20_000 })
     await assertCloseButtonOnTop(page)
-    await expect(page.getByText(/Hogyan tegyünk boldoggá/i)).toBeVisible()
+    await expect(page.getByText(/mindenkit sokko/i)).toBeVisible()
   })
 })

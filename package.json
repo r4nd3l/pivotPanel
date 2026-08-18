@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "test:e2e": "playwright test",
     "test:e2e:live": "E2E_BASE_URL=https://r4nd3l.github.io/pivotPanel playwright test",
+    "validate:schedule": "node scripts/validate-schedule.js",
     "test:e2e:ui": "playwright test --ui",
     "deploy": "gh-pages -d dist"
   },

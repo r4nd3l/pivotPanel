@@ -60,19 +60,26 @@
         v-if="showMovieModal"
         class="fixed inset-0 z-50 bg-black"
       >
+        <div
+          v-if="linkResolving"
+          class="absolute inset-0 flex flex-col items-center justify-center gap-6 text-white z-20"
+        >
+          <div class="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-blue-400"></div>
+          <p class="text-3xl font-medium">{{ t('live_loading') }}</p>
+        </div>
         <!-- Player layer (below controls) -->
-        <div class="absolute inset-0 z-0">
+        <div v-else class="absolute inset-0 z-0">
           <ExternalPlayer
             v-if="usesExternalPlayer"
-            :movie="currentMovie"
+            :movie="playbackMovie ?? currentMovie"
             :platform-label="externalPlatformLabel"
             :window-closed="externalWindowClosed"
             @reopen="reopenExternalWindow"
           />
           <LiveTvPlayer
             v-else-if="usesStreamPlayer"
-            :key="currentMovie?.link"
-            :movie="currentMovie"
+            :key="(playbackMovie ?? currentMovie)?.link"
+            :movie="playbackMovie ?? currentMovie"
             class="w-full h-full"
             @failed="closeMovie"
             @close="closeMovie"
@@ -154,7 +161,7 @@ const schedulePath = url.searchParams.get('schedule')
 
 const { scheduleData, fetchSchedule } = useSchedule(schedulePath)
 const {
-  showMovieModal, movies, hasMovies, currentMovie,
+  showMovieModal, movies, hasMovies, currentMovie, playbackMovie, linkResolving,
   usesStreamPlayer, usesYouTubePlayer, usesExternalPlayer,
   externalPlatformLabel, externalWindowClosed,
   playerReady,
@@ -162,7 +169,14 @@ const {
 } = useMoviePlayer(scheduleData)
 
 watch(showMovieModal, async (visible) => {
-  if (visible && usesYouTubePlayer.value) {
+  if (visible && usesYouTubePlayer.value && !linkResolving.value) {
+    await nextTick()
+    initPlayer('yt-player')
+  }
+})
+
+watch([playbackMovie, linkResolving], async ([movie, resolving]) => {
+  if (showMovieModal.value && movie && usesYouTubePlayer.value && !resolving) {
     await nextTick()
     initPlayer('yt-player')
   }

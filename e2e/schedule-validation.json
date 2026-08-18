@@ -1,0 +1,1167 @@
+{
+  "checked": 145,
+  "passed": 145,
+  "failed": 0,
+  "results": [
+    {
+      "date": "2026-01-01",
+      "time": "07:00",
+      "title": "M1 - Híradó",
+      "url": "https://www.youtube-nocookie.com/embed/NTwyipJrdPM",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-01",
+      "time": "07:00",
+      "title": "M1 - Híradó",
+      "url": "https://stream.y5.hu/stream/stream_bekescsaba/stream.m3u8",
+      "role": "fallback",
+      "ok": true
+    },
+    {
+      "date": "2026-01-01",
+      "time": "09:30",
+      "title": "Ez a film az utolsó percig izgalomban tart! A titokzatos összeesküvés – film magyarul",
+      "url": "https://www.youtube.com/watch?v=vxlmHKl11Us",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-01",
+      "time": "13:00",
+      "title": "Kegyenc fegyenc [TELJES FILM Full HD minőségben]",
+      "url": "https://www.youtube.com/watch?v=cpUjEm75q2Y",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-01",
+      "time": "15:30",
+      "title": "187 | Teljes FILM (Magyarul)",
+      "url": "https://www.youtube.com/watch?v=wdD72VNP6tU",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-01",
+      "time": "18:00",
+      "title": "- Poirot-01_1.évad 1.epizód_A Clapham-i szakácsnő esete",
+      "url": "https://www.youtube.com/watch?v=GbkUvX3MXhk&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=1&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-02",
+      "time": "09:30",
+      "title": "Nagyfater Elszabadul - Teljes Film Magyarul! (HD) (Vígjáték)",
+      "url": "https://www.youtube.com/watch?v=y-fk2fzX4IA",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-02",
+      "time": "13:00",
+      "title": "Utazók 2016 Teljes film Magyarul/HD",
+      "url": "https://www.youtube.com/watch?v=czZKypB7YqM",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-02",
+      "time": "15:30",
+      "title": "A nyugdíjas zsaru postaládájába rossz bizonyítékot dobtak | Akciófilm | Teljes film magyarul",
+      "url": "https://www.youtube.com/watch?v=TZeLsEoZ5D0",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-02",
+      "time": "18:00",
+      "title": "- Poirot-19_2.évad 8.epizód_Az elrabolt miniszterelnök",
+      "url": "https://www.youtube.com/watch?v=nXpblf7fqGk&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=19&pp=iAQB0gcJCdkKAYcqIYzv",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-03",
+      "time": "09:30",
+      "title": "Veszélyes vizek-(Thriller 2023, Teljes film-HUN)",
+      "url": "https://www.youtube.com/watch?v=pJyIhWcIBVM",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-03",
+      "time": "13:00",
+      "title": "A titok: Merj álmodni (teljes film magyarul) 2020",
+      "url": "https://www.youtube.com/watch?v=e5yjVpRamEg",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-03",
+      "time": "15:30",
+      "title": "A múlt titka-Teljes Film Magyarul-Misztikus-Thriller",
+      "url": "https://www.youtube.com/watch?v=mZKrkP2F21c",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-03",
+      "time": "18:00",
+      "title": "- Poirot-20_2.évad 9.epizód_A Western Star esete",
+      "url": "https://www.youtube.com/watch?v=MkAOaxODK1w&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=20&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-04",
+      "time": "09:30",
+      "title": "Rossz anyák (2016) HD Teljes Film",
+      "url": "https://www.youtube.com/watch?v=pWjIBZ1hEX0",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-04",
+      "time": "13:00",
+      "title": "A Zsaruk Becsülete | Teljes FILM (Magyarul)",
+      "url": "https://www.youtube.com/watch?v=scofBwUyLfQ",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-04",
+      "time": "15:30",
+      "title": "…és megint dühbe jövünk | Teljes Film Magyarul | 1978 | 1080p",
+      "url": "https://www.youtube.com/watch?v=ziTRytZY4Iw",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-04",
+      "time": "18:00",
+      "title": "- Poirot-21_3.évad 1.epizód_A titokzatos Styles-i eset",
+      "url": "https://www.youtube.com/watch?v=lN-23aQWdA0&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=21&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-05",
+      "time": "09:30",
+      "title": "Ez a film mindenkit sokko! Tökéletes élete tragikusan összeomlik 😯 Dráma, Thriller | Filmek Magyarul",
+      "url": "https://www.youtube.com/watch?v=GmM-a2zjORs",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-05",
+      "time": "13:00",
+      "title": "Kontroll | Teljes Film Magyarul | 2003 | 720p",
+      "url": "https://www.youtube.com/watch?v=ls5NJ23EbSY",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-05",
+      "time": "15:30",
+      "title": "Prometheus 2012 HD720p Teljes film magyarul",
+      "url": "https://www.youtube.com/watch?v=T2irO_xBoT0",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-05",
+      "time": "18:00",
+      "title": "- Poirot-22_3.évad 2.epizód_Mi nyílik a kertedben?",
+      "url": "https://www.youtube.com/watch?v=mRSLs3pHcyU&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=22&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-06",
+      "time": "09:30",
+      "title": "Az utolsó boszorkányvadász (2015) teljes film magyarul BluRay",
+      "url": "https://www.youtube.com/watch?v=27RKiC2dhSM",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-06",
+      "time": "13:00",
+      "title": "Gothika - teljes film magyarul",
+      "url": "https://www.youtube.com/watch?v=g4msD29A7V8",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-06",
+      "time": "15:30",
+      "title": "Ártatlanság ( teljes film magyarul)romantikus vígjáték",
+      "url": "https://www.youtube.com/watch?v=1NyxFQehVBY",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-06",
+      "time": "18:00",
+      "title": "- Poirot-23_3.évad 3.epizód_Hová lett egymillió dollárnyi kötvény?",
+      "url": "https://www.youtube.com/watch?v=kIbAfWnmQj4&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=23&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-07",
+      "time": "09:30",
+      "title": "Mennyei Királyság teljes film",
+      "url": "https://www.youtube.com/watch?v=V_iH6jWeWjk",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-07",
+      "time": "13:00",
+      "title": "fák jú tanár úr 3 HUN (2018)",
+      "url": "https://www.youtube.com/watch?v=e3CI6fZaUoM",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-07",
+      "time": "15:30",
+      "title": "Senki sem élt, amikor leszálltunk | Teljes sci-fi Alien film 4K-ban",
+      "url": "https://www.youtube.com/watch?v=UH-xxHm-I9o",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-07",
+      "time": "18:00",
+      "title": "- Poirot-24_3.évad 4.epizód_A Plymouth express",
+      "url": "https://www.youtube.com/watch?v=aisW3f8Vw7Q&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=24&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-08",
+      "time": "09:30",
+      "title": "Roswell Delirium TELJES FILM 4K-ban | Sci-fi filmek | Anthony Michael Hall | Éjféli vetítés",
+      "url": "https://www.youtube.com/watch?v=OJx9gcdFeRA",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-08",
+      "time": "13:00",
+      "title": "Suttogások a falakról | Teljes horrorfilm angolul | Ingyenes filmek",
+      "url": "https://www.youtube.com/watch?v=4iAYgQKGWLo",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-08",
+      "time": "15:30",
+      "title": "THRILLER FILMEK ▶️ Lenyűgözően feszült történet, elképesztő végjátékkal! | Teljes Film",
+      "url": "https://www.youtube.com/watch?v=du71sW4Rcfw",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-08",
+      "time": "18:00",
+      "title": "- Poirot-25_3.évad 5.epizód_A darázsfészek",
+      "url": "https://www.youtube.com/watch?v=A-gi6kGGd-g&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=25&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-09",
+      "time": "09:30",
+      "title": "VÍGJÁTÉK ▶️ Egy túlbuzgó anya és a fiatal pár őrült harca! | Teljes film",
+      "url": "https://www.youtube.com/watch?v=ErtC2oRwFjs",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-09",
+      "time": "13:00",
+      "title": "Casino | Teljes FILM (Magyarul)",
+      "url": "https://www.youtube.com/watch?v=s5GHJbFsIFM",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-09",
+      "time": "15:30",
+      "title": "Szuperzsaru | Teljes Film Magyarul | 1980 | 1080p",
+      "url": "https://www.youtube.com/watch?v=P53lJNjakvk",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-09",
+      "time": "18:00",
+      "title": "- Poirot-26_3.évad 6.epizód_Tragédia a Marsdon birtokon",
+      "url": "https://www.youtube.com/watch?v=3M75l-g389w&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=26&pp=iAQB0gcJCdkKAYcqIYzv",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-10",
+      "time": "09:30",
+      "title": "FESZÜLT THRILLER! A leglehetetlenebb szökés az igaz történet alapján | Teljes Film Magyarul",
+      "url": "https://www.youtube.com/watch?v=X6-uwM36Aj4",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-10",
+      "time": "13:00",
+      "title": "SZUPER VÍGJÁTÉK! ▶️ A főnök, aki nem ismer kíméletet a riválisával szemben | Filmek Magyarul Teljes",
+      "url": "https://www.youtube.com/watch?v=fLf8EhOnuIg",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-10",
+      "time": "15:30",
+      "title": "John Wick (2014) - Teljes Film Magyarul",
+      "url": "https://www.youtube.com/watch?v=cNvQ4tJJNMQ",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-10",
+      "time": "18:00",
+      "title": "- Poirot-29_3.évad 9.epizód_A királyi rubin elrablása",
+      "url": "https://www.youtube.com/watch?v=i8ga_FO7IW4&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=29&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-11",
+      "time": "09:30",
+      "title": "📽️ Távkapcs - Teljes film Magyarul ❗",
+      "url": "https://www.youtube.com/watch?v=iP3fP3hsRBs",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-11",
+      "time": "13:00",
+      "title": "AKCIÓFILM! ▶️ Donnie Yen a királyi harcosok ellen! 🎬 Teljes film",
+      "url": "https://www.youtube.com/watch?v=5F0hd4ik_7I",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-11",
+      "time": "15:30",
+      "title": "Lenyűgöző történetű film, ami garantáltan magával sodor | A hős és a szörnyeteg | Filmek Magyarul",
+      "url": "https://www.youtube.com/watch?v=Z_l_hSl1oAg",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-11",
+      "time": "18:00",
+      "title": "- Poirot-30_3.évad 10.epizód_A Viktória bál esete",
+      "url": "https://www.youtube.com/watch?v=iddmb68DLx0&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=30&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-12",
+      "time": "09:30",
+      "title": "Az ügynököt elárulták, és a saját hálózata vadászott rá | Akciófilm | Teljes film magyarul",
+      "url": "https://www.youtube.com/watch?v=bSShNVovS50",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-12",
+      "time": "13:00",
+      "title": "Vasököl.2011 ( teljes film )",
+      "url": "https://www.youtube.com/watch?v=gWfIHZGlSoY",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-12",
+      "time": "15:30",
+      "title": "Vér és csont - Teljes Film Magyarul",
+      "url": "https://www.youtube.com/watch?v=6ndIY7tHuAo",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-12",
+      "time": "18:00",
+      "title": "- Poirot-31_3.évad 11.epizód_A vadászház titka",
+      "url": "https://www.youtube.com/watch?v=wio8RqzomuQ&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=31&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-13",
+      "time": "09:30",
+      "title": "Az Ötödik Elem Teljes Film (2160p/4K) magyar szinkronnal(Dolby 5.1)",
+      "url": "https://www.youtube.com/watch?v=R2_UpO3KvBg",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-13",
+      "time": "13:00",
+      "title": "FEKETE VÍGJÁTÉK ▶️ Robert De Niro és Bruce Willis őrült kalandja Hollywoodban! | Teljes film",
+      "url": "https://www.youtube.com/watch?v=xT2VIQ-48h0",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-13",
+      "time": "15:30",
+      "title": "Részeges karatemester 2 (1994) Teljes Film HD",
+      "url": "https://www.youtube.com/watch?v=2Edrze5v1Yc",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-13",
+      "time": "18:00",
+      "title": "- Poirot-32_4.évad 1.epizód_Az ABC gyilkosságok",
+      "url": "https://www.youtube.com/watch?v=PhBrS9gOdrk&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=32&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-14",
+      "time": "09:30",
+      "title": "Ez a film percek alatt beszippant és nem enged el 🎬 Kitaszítva | Romantikus, Dráma | Filmek Magyarul",
+      "url": "https://www.youtube.com/watch?v=b1snfrzEEZA",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-14",
+      "time": "13:00",
+      "title": "Feltámadás Függetlenség Napja #Teljes film magyarul",
+      "url": "https://www.youtube.com/watch?v=tSuMlbir_rs",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-14",
+      "time": "15:30",
+      "title": "Ajánlom! 👍 Feszült bűnügyi film, amit látnod kell! A lakatos | Akció Krimi | Teljes Magyarul",
+      "url": "https://www.youtube.com/watch?v=NXyexuX8xhs",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-14",
+      "time": "18:00",
+      "title": "- Poirot-33_4.évad 2.epizód_Halál a felhők között",
+      "url": "https://www.youtube.com/watch?v=w7yu3z8V9Qo&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=33&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-15",
+      "time": "09:30",
+      "title": "CSAPDA I Magyar szinkron I Akció-Thriller I Teljes film HD I Dwayne Johnson, Jon Bernthal",
+      "url": "https://www.youtube.com/watch?v=UIuwA4iOmhY",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-15",
+      "time": "13:00",
+      "title": "22 Jump Street - A túlkoros osztag ( teljes film magyarul)",
+      "url": "https://www.youtube.com/watch?v=IkJWDlNvATY",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-15",
+      "time": "15:30",
+      "title": "Nyomás utána! 4K Ultra HD 2160p Teljes film magyarul!",
+      "url": "https://www.youtube.com/watch?v=a2wKXY_k-TA",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-15",
+      "time": "18:00",
+      "title": "- Poirot-34_4.évad 3.epizód_A fogorvos széke",
+      "url": "https://www.youtube.com/watch?v=q_FOn0ihSEA&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=34&pp=iAQB0gcJCdkKAYcqIYzv",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-16",
+      "time": "09:30",
+      "title": "Rossz anyák karácsonya (teljes film magyarul / vígjáték)",
+      "url": "https://www.youtube.com/watch?v=PFw2qY0UkL8",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-16",
+      "time": "13:00",
+      "title": "MISZTIKUS FANTASY FILM ▶️ Bukott angyalok harca a lány szívéért | Nézd meg teljesen magyarul",
+      "url": "https://www.youtube.com/watch?v=xCWcYA7j0J4",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-16",
+      "time": "15:30",
+      "title": "John Wick: 2. felvonás Teljes film MAGYARUL",
+      "url": "https://www.youtube.com/watch?v=xJ8HM6HzlBY",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-16",
+      "time": "18:00",
+      "title": "- Poirot-35_5.évad 1.epizód_Az egyiptomi sírkamra esete",
+      "url": "https://www.youtube.com/watch?v=sVF_JE_Omnw&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=35&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-17",
+      "time": "09:30",
+      "title": "Banános Joe (1982) | teljes film magyarul",
+      "url": "https://www.youtube.com/watch?v=6Qqyhlxhfio",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-17",
+      "time": "13:00",
+      "title": "BÜNTETLENÜL – ELSŐ TALÁLKOZÁS  [2017] [Teljes Film Magyarul] [Akciófilm] [Az Egész Film Magyarul]",
+      "url": "https://www.youtube.com/watch?v=OmxB5WQ0AYY",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-17",
+      "time": "15:30",
+      "title": "ESZEMENT VÍGJÁTÉK! | Az év legőrültebb egyetemi kalandja | Teljes Film Magyarul",
+      "url": "https://www.youtube.com/watch?v=IlwPZrqbg2M",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-17",
+      "time": "18:00",
+      "title": "- Poirot-36_5.évad 2.epizód_A másodhegedűs",
+      "url": "https://www.youtube.com/watch?v=FsCm7xMKd2M&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=36&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-18",
+      "time": "09:30",
+      "title": "Red 2 2013 Teljes Film Magyarul",
+      "url": "https://www.youtube.com/watch?v=6dnxfF1-oMc",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-18",
+      "time": "13:00",
+      "title": "Lány a parkban | Dráma | teljes filmek magyarul",
+      "url": "https://www.youtube.com/watch?v=G4W-UMlxvM4",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-18",
+      "time": "15:30",
+      "title": "Mi kell a nőnek?Teljes film Magyarul",
+      "url": "https://www.youtube.com/watch?v=BVEni7LWyZU",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-18",
+      "time": "18:00",
+      "title": "- Poirot-37_5.évad 3.epizód_A sárga írisz",
+      "url": "https://www.youtube.com/watch?v=hL6M9VfpaIo&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=37&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-19",
+      "time": "09:30",
+      "title": "FÉRJHEZ MÉSZ, MERT AZT MONDTAM! (2007) Magyar szinkron | Romantikus vígjáték | Teljes film HD",
+      "url": "https://www.youtube.com/watch?v=kn4X567cgMs",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-19",
+      "time": "13:00",
+      "title": "Ne Légy Barom 1 (Teljes Film) HD 720p",
+      "url": "https://www.youtube.com/watch?v=nMO0LEDLZD4",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-19",
+      "time": "15:30",
+      "title": "VÍGJÁTÉK! ▶️ Egy bátor diák elkeseredett harca az másnapossággal | Teljes film",
+      "url": "https://www.youtube.com/watch?v=ELVLCOwJOzg",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-19",
+      "time": "18:00",
+      "title": "- Poirot-38_5.évad 4.epizód_Az eltűnt végrendelet",
+      "url": "https://www.youtube.com/watch?v=9I8rcWFin48&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=38&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-20",
+      "time": "09:30",
+      "title": "Túlélte a háborút, de a múltja elől nem tudott elmenekülni | Teljes film magyarul | Thriller",
+      "url": "https://www.youtube.com/watch?v=Q5CU6tDnBKI",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-20",
+      "time": "13:00",
+      "title": "A két zsaru, akiket az egész város el akart pusztítani | Sylvester Stallone | Teljes film magyarul",
+      "url": "https://www.youtube.com/watch?v=AaCgIyaBMLA",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-20",
+      "time": "15:30",
+      "title": "Anyád lehetnek -teljes film magyarul",
+      "url": "https://www.youtube.com/watch?v=EjK7wYWzjWk",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-20",
+      "time": "18:00",
+      "title": "- Poirot-39_5.évad 5.epizód_Az itáliai nemes esete",
+      "url": "https://www.youtube.com/watch?v=2_hNfa_HqXc&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=39&pp=iAQB0gcJCdkKAYcqIYzv",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-21",
+      "time": "09:30",
+      "title": "Warrior-A végső menet Teljes film",
+      "url": "https://www.youtube.com/watch?v=P6rLjljVcnc",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-21",
+      "time": "15:30",
+      "title": "BÜNTETLENÜL - HALÁLOS CSAPDÁBAN [2023] [Teljes Film Magyarul] [Akciófilm] [Az Egész Film Magyarul]",
+      "url": "https://www.youtube.com/watch?v=FEcIZV2ecdA",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-21",
+      "time": "18:00",
+      "title": "- Poirot-40_5.évad 6.epizód_A csokoládés doboz",
+      "url": "https://www.youtube.com/watch?v=vPmKbIFPszg&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=40&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-22",
+      "time": "13:00",
+      "title": "Mostohakutyák | teljes filmek magyarul",
+      "url": "https://www.youtube.com/watch?v=ym9xzB2_UMw",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-22",
+      "time": "15:30",
+      "title": "🤯 Ez a film teljes őrület | Fedőneve: Takarító | Ajánljuk akció- és vígjátékrajongóknak!",
+      "url": "https://www.youtube.com/watch?v=THHPSQtTNb8",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-22",
+      "time": "18:00",
+      "title": "- Poirot-41_5.évad 7.epizód_A halott ember tükre",
+      "url": "https://www.youtube.com/watch?v=RQiTCqAhqBI&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=41&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-23",
+      "time": "09:30",
+      "title": "Fogadom (teljes film)",
+      "url": "https://www.youtube.com/watch?v=CN294LnisVQ",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-23",
+      "time": "13:00",
+      "title": "A kárhozat útja (2002) Teljes film magyarul",
+      "url": "https://www.youtube.com/watch?v=0rs7129T8ng",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-23",
+      "time": "15:30",
+      "title": "A MENEDÉK 3 [2017] [Teljes Film Magyarul] [Teljes Családi Film] [Film Gyerekeknek]",
+      "url": "https://www.youtube.com/watch?v=j7awLlpMaIU",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-23",
+      "time": "18:00",
+      "title": "- Poirot-42_5.évad 8.epizód_Ékszerrablás a Grand Metropolitan-ben",
+      "url": "https://www.youtube.com/watch?v=mqdDlGswF2A&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=42&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-24",
+      "time": "09:30",
+      "title": "Bűnvadászok | Teljes Film Magyarul | 1977 | 1080p",
+      "url": "https://www.youtube.com/watch?v=6ibeKctymjw",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-24",
+      "time": "13:00",
+      "title": "VÍGJÁTÉK ▶️ Semmire sem emlékszik, de azt hiszi, ő a legveszélyesebb titkosügynök | Teljes film",
+      "url": "https://www.youtube.com/watch?v=9BhDqwTbw0M",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-24",
+      "time": "15:30",
+      "title": "Az utolsó kezelt (2022) (18+)- TELJES FILM MAGYARUL",
+      "url": "https://www.youtube.com/watch?v=g9_jWvQPbP8",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-24",
+      "time": "18:00",
+      "title": "- Poirot-43_6.évad 1.epizód_Poirot karácsonya",
+      "url": "https://www.youtube.com/watch?v=hm7XoW5M2jI&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=43&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-25",
+      "time": "09:30",
+      "title": "AKCIÓFILM ▶️ A fiú, aki a földalatti harcok legendája lett! | Teljes Film Magyarul",
+      "url": "https://www.youtube.com/watch?v=xMUyF_eEg7I",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-25",
+      "time": "13:00",
+      "title": "Üvegtigris 2 teljes film magyarul",
+      "url": "https://www.youtube.com/watch?v=zpZSSuzlpeQ",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-25",
+      "time": "15:30",
+      "title": "két világ között teljes film magyarul",
+      "url": "https://www.youtube.com/watch?v=qd5fGBoabvI",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-25",
+      "time": "18:00",
+      "title": "- Poirot-44_6.évad 2.epizód_A kisegér mindent lát",
+      "url": "https://www.youtube.com/watch?v=liK3JgOXXWQ&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=44&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-26",
+      "time": "09:30",
+      "title": "10 ÉV GYŰLÖLET | Film az orbáni gyűlöletpolitikáról | English Subtitles",
+      "url": "https://www.youtube.com/watch?v=kzgA6i54ne8",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-26",
+      "time": "13:00",
+      "title": "BRUTÁLIS HORROR! ▶️ Egy elmebeteg gyilkos visszatér a gyerekkori otthonába! | Filmek Magyarul",
+      "url": "https://www.youtube.com/watch?v=L4Fa15l9zmI",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-26",
+      "time": "15:30",
+      "title": "Tisztítótűz | Teljes FILM  (Magyarul)",
+      "url": "https://www.youtube.com/watch?v=JP48-ZrIwss",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-26",
+      "time": "18:00",
+      "title": "- Poirot-45_6.évad 3.epizód_Az ijedt szemű lány",
+      "url": "https://www.youtube.com/watch?v=H-EjHbcZ7Z4&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=45&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-27",
+      "time": "09:30",
+      "title": "BAGGER VANCE LEGENDÁJA I Magyar szinkron I Sportdráma I Teljes film HD I Charlize Theron, Matt Damon",
+      "url": "https://www.youtube.com/watch?v=X0_Lt4nssEo",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-27",
+      "time": "13:00",
+      "title": "A Kém teljes film magyarul",
+      "url": "https://www.youtube.com/watch?v=5W9Pgha9z7c",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-27",
+      "time": "15:30",
+      "title": "👉 Ez a film egy erőteljes dráma, amit legalább egyszer látnod kell! Teljes filmek magyar nyelven",
+      "url": "https://www.youtube.com/watch?v=mI12uiqGv2A",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-27",
+      "time": "18:00",
+      "title": "- Poirot-46_6.évad 4.epizód_A kutya se látta",
+      "url": "https://www.youtube.com/watch?v=ggrJvBjzJio&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=46&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-28",
+      "time": "09:30",
+      "title": "A MENEDÉK [2013] [Teljes Film Magyarul] [Teljes Családi Film] [Film Gyerekeknek]",
+      "url": "https://www.youtube.com/watch?v=XiUyWdo4P14",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-28",
+      "time": "15:30",
+      "title": "BOSSZÚ KOMMANDÓ [2018] [Teljes Film Magyarul] [Akció Film]",
+      "url": "https://www.youtube.com/watch?v=t3eXpLuj_LQ",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-28",
+      "time": "18:00",
+      "title": "- Poirot-47_7.évad 1.epizód_Az Ackroyd-i gyilkosság",
+      "url": "https://www.youtube.com/watch?v=71dcoDR9hfs&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=47&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-29",
+      "time": "09:30",
+      "title": "Az 51-es körzet titkai [TELJES FILM]",
+      "url": "https://www.youtube.com/watch?v=rUmsjTlJk_Y",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-29",
+      "time": "13:00",
+      "title": "Alkonyat Napfogyatkozas 2010 HUN BDRip XviD HUNDUB",
+      "url": "https://www.youtube.com/watch?v=t4W3a30gbC4",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-29",
+      "time": "15:30",
+      "title": "Vámpírkutya | Vígjáték | teljes filmek magyarul",
+      "url": "https://www.youtube.com/watch?v=oozPYHFF5TY",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-29",
+      "time": "18:00",
+      "title": "- Poirot-48_7.évad 2.epizód_Lord Edgware halála",
+      "url": "https://www.youtube.com/watch?v=WeHnX5CsQJY&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=48&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-30",
+      "time": "09:30",
+      "title": "EZ A HORROR FILM LESOKKOL! Nem gyenge idegzetűeknek! A haláltúra 2 | Teljes Magyarul",
+      "url": "https://www.youtube.com/watch?v=Tq5et-cSLIs",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-30",
+      "time": "13:00",
+      "title": "A MENEDÉK 2 [2015] [Teljes Film Magyarul] [Teljes Családi Film] [Film Gyerekeknek]",
+      "url": "https://www.youtube.com/watch?v=a0UDnBIjkv8",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-30",
+      "time": "15:30",
+      "title": "Váratlan Szerelem - Teljes Filmek Magyarul! (Romantikus) (HD)",
+      "url": "https://www.youtube.com/watch?v=RUX3np-jv2A",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-30",
+      "time": "18:00",
+      "title": "- Poirot-49_8.évad 1.epizód_Nyaraló gyilkosok",
+      "url": "https://www.youtube.com/watch?v=5dDXV3JC_NQ&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=49&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-31",
+      "time": "09:30",
+      "title": "SZUPERCELLA I Magyar szinkron I Katasztrófafilm, Akció, Thriller I Teljes film HD I Alec Baldwin",
+      "url": "https://www.youtube.com/watch?v=7Kf5jNKRvuY",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-31",
+      "time": "13:00",
+      "title": "Ez a ROMANTIKUS KOMÉDIA teljesen lesokkol! ▶️ A luxustól a szegénységig! | Teljes film",
+      "url": "https://www.youtube.com/watch?v=1fnzDlgnDkk",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-31",
+      "time": "15:30",
+      "title": "Air Force One – Az elnök különgépe [TELJES FILM]",
+      "url": "https://www.youtube.com/watch?v=EraSumgl3V0",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-01-31",
+      "time": "18:00",
+      "title": "- Poirot-50_8.évad 2.epizód_Gyilkosság Mezopotámiában",
+      "url": "https://www.youtube.com/watch?v=paBTVwtM2f0&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=50&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-02-01",
+      "time": "09:30",
+      "title": "Jézus Film | Teljes magyar film",
+      "url": "https://www.youtube.com/watch?v=8pF4zKFYo1w",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-02-01",
+      "time": "13:00",
+      "title": "Cápacsali 2: Mentsük meg a zátonyt! | teljes filmek magyarul",
+      "url": "https://www.youtube.com/watch?v=Bdaxy0kqlh8",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-02-01",
+      "time": "15:30",
+      "title": "a városban kegyetlen banda uralkodik, de egy elit egység vadászatot indít ellenük | film magyarul",
+      "url": "https://www.youtube.com/watch?v=JU0oeACf630",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-02-01",
+      "time": "18:00",
+      "title": "- Poirot-53_9.évad 3.epizód_Halál a Níluson",
+      "url": "https://www.youtube.com/watch?v=gDGFTlG9eZQ&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=53&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-02-02",
+      "time": "09:30",
+      "title": "A Film, Ami Sokkolta a Nézőket! A turisták egy vérszomjas lény prédái! Horror Filmek Magyarúl",
+      "url": "https://www.youtube.com/watch?v=-jOHpnNHlD8",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-02-02",
+      "time": "13:00",
+      "title": "Nincs kettő négy nélkül 1080p",
+      "url": "https://www.youtube.com/watch?v=6bww8jucWjs",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-02-02",
+      "time": "18:00",
+      "title": "- Poirot-54_9.évad 4.epizód_Hétvégi gyilkosság",
+      "url": "https://www.youtube.com/watch?v=hWRDwvbTx20&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=54&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-02-03",
+      "time": "18:00",
+      "title": "- Poirot-55_10.évad 1.epizód_A titokzatos kék vonat",
+      "url": "https://www.youtube.com/watch?v=2Sc32H0nVqg&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=55&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-02-04",
+      "time": "18:00",
+      "title": "- Poirot-56_10.évad 2.epizód_Nyílt kártyákkal",
+      "url": "https://www.youtube.com/watch?v=-8X1IUZesXM&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=56&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-02-05",
+      "time": "18:00",
+      "title": "- Poirot-57_10.évad 3.epizód_Temetni veszélyes",
+      "url": "https://www.youtube.com/watch?v=h3YqMjDCfeg&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=57&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-02-06",
+      "time": "18:00",
+      "title": "- Poirot-58_10.évad 4.epizód_Zátonyok között",
+      "url": "https://www.youtube.com/watch?v=CgaJiRdi9tY&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=58&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-02-07",
+      "time": "18:00",
+      "title": "- Poirot-59_11.évad 1.epizód_Mrs. McGinty halott",
+      "url": "https://www.youtube.com/watch?v=GAvjYlpj45c&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=59&pp=iAQB0gcJCdkKAYcqIYzv",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-02-08",
+      "time": "18:00",
+      "title": "- Poirot-60_11.évad 2.epizód_Macska a galambok között",
+      "url": "https://www.youtube.com/watch?v=s4DfJ64trPg&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=60&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-02-09",
+      "time": "18:00",
+      "title": "- Poirot-62_11.évad 4.epizód_Randevú a halállal",
+      "url": "https://www.youtube.com/watch?v=gHHE-QGIQ2c&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=62&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-02-10",
+      "time": "18:00",
+      "title": "- Poirot-64_12.évad 2.epizód_Ellopott gyilkosság",
+      "url": "https://www.youtube.com/watch?v=qhDDFSWcuLk&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=64&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-02-11",
+      "time": "18:00",
+      "title": "- Poirot-65_12.évad 3.epizód_Gyilkosság az Orient expressen",
+      "url": "https://www.youtube.com/watch?v=BmVtXNUK6Oo&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=65&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-02-12",
+      "time": "18:00",
+      "title": "- Poirot-66_12.évad 4.epizód_Órák",
+      "url": "https://www.youtube.com/watch?v=G7Zndt9VtF8&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=66&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-02-13",
+      "time": "18:00",
+      "title": "- Poirot-67_13.évad 1.epizód_Az elefántok nem felejtenek",
+      "url": "https://www.youtube.com/watch?v=8z0A-KQai8E&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=67&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-02-14",
+      "time": "18:00",
+      "title": "- Poirot-68_13.évad 2.epizód_A nagy négyes",
+      "url": "https://www.youtube.com/watch?v=8pNglD-siy0&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=68&pp=iAQB0gcJCdkKAYcqIYzv",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-02-15",
+      "time": "18:00",
+      "title": "- Poirot-68_13.évad 3.epizód_Gloriett a hullának",
+      "url": "https://www.youtube.com/watch?v=2G4Iy67yxY4&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=69&pp=iAQB0gcJCdkKAYcqIYzv",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-02-16",
+      "time": "18:00",
+      "title": "- Poirot-69_13.évad 4.epizód_Herkules munkái",
+      "url": "https://www.youtube.com/watch?v=a-G9HTuyIGs&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=70&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    },
+    {
+      "date": "2026-02-17",
+      "time": "18:00",
+      "title": "- Poirot-70_13.évad 5.epizód_Függöny (Poirot utolsó esete)",
+      "url": "https://www.youtube.com/watch?v=sjR9-33h39I&list=PLqqMrJJCqP5ap6XJgiH_3V-WewXttIDtA&index=71&pp=iAQB",
+      "role": "primary",
+      "ok": true
+    }
+  ]
+}

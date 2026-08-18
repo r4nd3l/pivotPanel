@@ -1,6 +1,7 @@
 import { ref, computed, onUnmounted } from 'vue'
 import { getCurrentDateString } from '../utils/dateUtils.js'
 import { getPlayerMode, getPlatformLabel } from '../utils/moviePlayerMode.js'
+import { resolvePlayableLink, allCandidateLinks } from '../utils/linkHealth.js'
 /** @typedef {import('../types/schedule.js').ScheduleApiResponse} ScheduleApiResponse */
 /** @typedef {import('../types/schedule.js').Movie} Movie */
 
@@ -61,6 +62,8 @@ export default function useMoviePlayer(scheduleData) {
   /** @type {import('vue').Ref<boolean>} */
   const scheduleTriggered = ref(false)
   const externalWindowClosed = ref(false)
+  const resolvedLink = ref(null)
+  const linkResolving = ref(false)
   let apiReady = false
   let apiLoading = false
   let externalPollTimer = null
@@ -86,15 +89,21 @@ export default function useMoviePlayer(scheduleData) {
     return movies.value[idx]
   })
 
-  const playerMode = computed(() => getPlayerMode(currentMovie.value))
-
-  const usesStreamPlayer = computed(() => playerMode.value === 'stream')
-
-  const usesYouTubePlayer = computed(() => playerMode.value === 'youtube')
-
-  const usesExternalPlayer = computed(() => playerMode.value === 'external')
-
   const externalPlatformLabel = computed(() => getPlatformLabel(currentMovie.value))
+
+  const playbackMovie = computed(() => {
+    const movie = currentMovie.value
+    if (!movie) return null
+    if (!resolvedLink.value || resolvedLink.value === movie.link) return movie
+    const remaining = allCandidateLinks(movie).filter((url) => url !== resolvedLink.value)
+    return { ...movie, link: resolvedLink.value, fallback_links: remaining }
+  })
+
+  const usesStreamPlayer = computed(() => getPlayerMode(playbackMovie.value) === 'stream')
+
+  const usesYouTubePlayer = computed(() => getPlayerMode(playbackMovie.value) === 'youtube')
+
+  const usesExternalPlayer = computed(() => getPlayerMode(playbackMovie.value) === 'external')
 
   function startExternalPoll() {
     clearInterval(externalPollTimer)
@@ -162,7 +171,7 @@ export default function useMoviePlayer(scheduleData) {
       player.value.destroy()
       player.value = null
     }
-    const movie = currentMovie.value
+    const movie = playbackMovie.value ?? currentMovie.value
     if (!movie) return
     const id = extractVideoId(movie.link)
     if (!id) return
@@ -204,7 +213,7 @@ export default function useMoviePlayer(scheduleData) {
   }
 
   function reopenExternalWindow() {
-    const movie = currentMovie.value
+    const movie = playbackMovie.value ?? currentMovie.value
     if (!movie) return
     launchExternalWindow(movie)
     externalWindowClosed.value = false
@@ -215,16 +224,28 @@ export default function useMoviePlayer(scheduleData) {
    * @param {number} index
    * @param {{ fromSchedule?: boolean }} [options]
    */
-  function openMovie(index, options = {}) {
+  async function openMovie(index, options = {}) {
     if (index < 0 || index >= movies.value.length) return
     const movie = movies.value[index]
     scheduleTriggered.value = options.fromSchedule === true
     playerReady.value = false
+    resolvedLink.value = null
     currentMovieIndex.value = index
-    showMovieModal.value = true
+    linkResolving.value = true
 
-    if (getPlayerMode(movie) === 'external') {
-      launchExternalWindow(movie)
+    try {
+      resolvedLink.value = await resolvePlayableLink(movie)
+    } finally {
+      linkResolving.value = false
+    }
+
+    if (!resolvedLink.value) return
+
+    showMovieModal.value = true
+    const active = { ...movie, link: resolvedLink.value }
+
+    if (getPlayerMode(active) === 'external') {
+      launchExternalWindow(active)
       startExternalPoll()
     }
   }
@@ -232,6 +253,7 @@ export default function useMoviePlayer(scheduleData) {
   function closeMovie() {
     stopExternalPoll()
     closeExternalWindow()
+    resolvedLink.value = null
     if (player.value) {
       try { player.value.stopVideo() } catch { /* ignore */ }
       try { player.value.destroy() } catch { /* ignore */ }
@@ -301,6 +323,8 @@ export default function useMoviePlayer(scheduleData) {
     movies,
     hasMovies,
     currentMovie,
+    playbackMovie,
+    linkResolving,
     usesStreamPlayer,
     usesYouTubePlayer,
     usesExternalPlayer,

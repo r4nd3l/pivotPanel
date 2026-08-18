@@ -72,6 +72,7 @@
 import { ref, computed, nextTick, onMounted, onUnmounted, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import Hls from 'hls.js'
+import { allCandidateLinks } from '../utils/linkHealth.js'
 /** @typedef {import('../types/schedule.js').Movie} Movie */
 
 const props = defineProps({
@@ -103,9 +104,12 @@ let retryTimer = null
 let iframeLoadTimer = null
 let playDelayTimer = null
 let retryAttempts = 0
+const linkIndex = ref(0)
 
-const isHLS = computed(() => props.movie.link.includes('.m3u8'))
-const isVidea = computed(() => props.movie.link.includes('videa.hu/player'))
+const candidateLinks = computed(() => allCandidateLinks(props.movie))
+const activeLink = computed(() => candidateLinks.value[linkIndex.value] ?? props.movie.link)
+const isHLS = computed(() => activeLink.value.includes('.m3u8'))
+const isVidea = computed(() => activeLink.value.includes('videa.hu/player'))
 const progressPercent = computed(
   () => ((RETRY_SECONDS - retryCountdown.value) / RETRY_SECONDS) * 100,
 )
@@ -128,7 +132,7 @@ function startLoad() {
     if (isHLS.value) {
       startHls()
     } else {
-      iframeSrc.value = props.movie.link
+      iframeSrc.value = activeLink.value
       const timeout = isVidea.value ? VIDEA_LOAD_TIMEOUT_MS : IFRAME_LOAD_TIMEOUT_MS
       iframeLoadTimer = setTimeout(onStreamError, timeout)
     }
@@ -155,7 +159,7 @@ async function startHls() {
 
   if (Hls.isSupported()) {
     hls = new Hls({ lowLatencyMode: true, enableWorker: true })
-    hls.loadSource(props.movie.link)
+    hls.loadSource(activeLink.value)
     hls.attachMedia(el)
 
     hls.on(Hls.Events.MANIFEST_PARSED, (_, data) => {
@@ -177,7 +181,7 @@ async function startHls() {
       if (data.fatal) onStreamError()
     })
   } else if (el.canPlayType('application/vnd.apple.mpegurl')) {
-    el.src = props.movie.link
+    el.src = activeLink.value
     el.addEventListener('loadedmetadata', () => {
       el.play().catch(() => {})
     }, { once: true })
@@ -200,6 +204,14 @@ function onStreamError() {
   destroyHls()
   videoReady.value = false
   iframeSrc.value = null
+
+  if (linkIndex.value < candidateLinks.value.length - 1) {
+    linkIndex.value++
+    retryAttempts = 0
+    startLoad()
+    return
+  }
+
   retryAttempts++
 
   if (retryAttempts >= MAX_RETRIES) {
@@ -243,6 +255,7 @@ onUnmounted(() => {
 })
 
 watch(() => props.movie.link, () => {
+  linkIndex.value = 0
   retryAttempts = 0
   startLoad()
 })

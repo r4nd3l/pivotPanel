@@ -9,6 +9,7 @@ export interface Movie {
   platform?: string
   /** HH:MM – auto-close time for live/external slots */
   end_time?: string
+  fallback_links?: string[]
 }
 
 /**
