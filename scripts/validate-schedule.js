@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 /**
- * Validates all movie links in plan_2026.json (oEmbed for YouTube, manifest for HLS).
+ * Validates all movie links in plan_2026.json (oEmbed for YouTube; HLS played down to a segment).
+ * Live (IPTV) links must also pass the iptv-org allow-list: HTTPS, non-adult, from the slot's channel_ids.
  * Run: node scripts/validate-schedule.js
  */
 import { readFileSync, writeFileSync } from 'fs'
 import { fileURLToPath } from 'url'
 import { dirname, join } from 'path'
+import { loadIptvOrg, rejectReason, checkStream } from './lib/iptv.js'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const planPath = join(root, 'src/storage/plan_2026.json')
@@ -38,29 +40,20 @@ async function checkYouTube(url) {
   }
 }
 
-/**
- * @param {string} url
- */
-async function checkHls(url) {
-  try {
-    const res = await fetch(url, { signal: AbortSignal.timeout(8000) })
-    const text = await res.text()
-    return res.ok && text.includes('#EXTM3U')
-  } catch {
-    return false
-  }
-}
+const api = await loadIptvOrg()
 
 /**
  * @param {string} url
+ * @param {import('../src/types/schedule.js').Movie} movie
+ * @returns {Promise<string|null>} null when OK, otherwise the reason
  */
-async function checkLink(url) {
-  if (url.includes('.m3u8')) return checkHls(url)
-  if (url.includes('youtube') || url.includes('youtu.be')) return checkYouTube(url)
-  return true
+async function checkLink(url, movie) {
+  if (movie.type === 'live') return rejectReason(url, movie.channel_ids, api) ?? (await checkStream(url))
+  if (url.includes('youtube') || url.includes('youtu.be')) return (await checkYouTube(url)) ? null : 'YouTube unavailable'
+  return null
 }
 
-/** @type {Array<{date:string,time:string,title:string,url:string,role:string,ok:boolean}>} */
+/** @type {Array<{date:string,time:string,title:string,url:string,role:string,ok:boolean,reason:string|null}>} */
 const results = []
 const seen = new Set()
 
@@ -68,17 +61,18 @@ for (const day of plan.calendar) {
   for (const movie of day.movies ?? []) {
     const all = [movie.link, ...(movie.fallback_links ?? [])]
     for (const url of all) {
-      const key = url
+      const key = `${url}|${movie.channel_ids}`
       if (seen.has(key)) continue
       seen.add(key)
-      const ok = await checkLink(url)
+      const reason = await checkLink(url, movie)
       results.push({
         date: day.date,
         time: movie.time,
         title: movie.title,
         url,
         role: url === movie.link ? 'primary' : 'fallback',
-        ok,
+        ok: !reason,
+        reason,
       })
       await new Promise((r) => setTimeout(r, 100))
     }
@@ -96,7 +90,7 @@ console.log('FAILED:', failed.length)
 if (failed.length) {
   console.log('\nFailed links:')
   failed.forEach((r) => {
-    console.log(`  [${r.role}] ${r.title}`)
+    console.log(`  [${r.role}] ${r.title}: ${r.reason}`)
     console.log(`    ${r.url}`)
   })
 }

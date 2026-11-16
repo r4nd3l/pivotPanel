@@ -10,6 +10,8 @@ export interface Movie {
   /** HH:MM – auto-close time for live/external slots */
   end_time?: string
   fallback_links?: string[]
+  /** iptv-org channel IDs; scripts/refresh-streams.js rebuilds link + fallback_links from them */
+  channel_ids?: string[]
 }
 
 /**

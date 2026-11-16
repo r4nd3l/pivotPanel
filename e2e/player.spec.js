@@ -6,7 +6,7 @@ const TEST_DATE = new Date('2026-07-20T12:00:00+02:00')
 async function waitForHome(page) {
   await page.goto('./')
   await expect(page.getByText('Adatok betöltése…')).toBeHidden({ timeout: 15_000 })
-  await expect(page.getByRole('button', { name: /Poirot/i })).toBeVisible({ timeout: 10_000 })
+  await expect(page.getByRole('button', { name: /Love Nature/i })).toBeVisible({ timeout: 10_000 })
 }
 
 async function installClock(page, date = TEST_DATE) {
@@ -56,49 +56,41 @@ test.describe('PivotPanel player', () => {
 
   test('loads embedded schedule without ?schedule= param', async ({ page }) => {
     await expect(page).toHaveURL(/\/pivotPanel\/?$/)
-    await expect(page.getByRole('button', { name: /^M1 - Híradó$/i }).first()).toBeVisible()
-    await expect(page.getByRole('button', { name: /Poirot/i })).toBeVisible()
+    await expect(page.getByRole('button', { name: /^Euronews - Híradó$/i }).first()).toBeVisible()
+    await expect(page.getByRole('button', { name: /^Euronews - Esti híradó$/i })).toBeVisible()
   })
 
-  test('YouTube film: close button visible and on top', async ({ page }) => {
-    await page.getByRole('button', { name: /Kontroll/i }).click()
-    await expect(modal(page)).toBeVisible({ timeout: 15_000 })
-    await assertCloseButtonOnTop(page)
-    await assertNotStuckBlack(page)
-    await closeButton(page).click()
-    await expect(modal(page)).toBeHidden()
+  test('schedule has no YouTube links left', async ({ page }) => {
+    await expect(page.locator('#yt-player')).toHaveCount(0)
+    const titles = await page.locator('button').allInnerTexts()
+    for (const t of ['Love Nature - Természetfilm', 'Alföld TV', 'Oxygen Music - Zene']) {
+      expect(titles.map((x) => x.trim())).toContain(t)
+    }
   })
 
-  test('Poirot YouTube: modal opens with close button', async ({ page }) => {
-    await page.getByRole('button', { name: /Poirot/i }).click()
-    await expect(modal(page)).toBeVisible({ timeout: 15_000 })
-    await assertCloseButtonOnTop(page)
-    await expect(page.locator('#yt-player')).toBeAttached({ timeout: 15_000 })
-    await closeButton(page).click()
-    await expect(modal(page)).toBeHidden()
-  })
-
-  test('M1 news: close button works with live embed', async ({ page }) => {
-    await page.getByRole('button', { name: /^M1 - Híradó$/i }).first().click()
-    await expect(modal(page)).toBeVisible({ timeout: 15_000 })
-    await assertCloseButtonOnTop(page)
-    await assertNotStuckBlack(page)
-    await closeButton(page).click()
-    await expect(modal(page)).toBeHidden()
-  })
-
-  test('YouTube film loads player within 15s', async ({ page }) => {
-    await page.getByRole('button', { name: /Prometheus/i }).click()
-    await expect(modal(page)).toBeVisible({ timeout: 15_000 })
-    await assertCloseButtonOnTop(page)
-    await expect(page.locator('#yt-player')).toBeAttached({ timeout: 15_000 })
-  })
+  // Every IPTV slot must actually reach playback (video fades in only on 'playing')
+  for (const title of [
+    'Euronews - Híradó',
+    'Love Nature - Természetfilm',
+    'Alföld TV',
+    'Oxygen Music - Zene',
+    'Euronews - Esti híradó',
+  ]) {
+    test(`IPTV slot plays: ${title}`, async ({ page }) => {
+      await page.getByRole('button', { name: title, exact: true }).first().click()
+      await expect(modal(page)).toBeVisible({ timeout: 15_000 })
+      await assertCloseButtonOnTop(page)
+      await expect(modal(page).locator('video.opacity-100')).toBeVisible({ timeout: 30_000 })
+      await closeButton(page).click()
+      await expect(modal(page)).toBeHidden()
+    })
+  }
 
   test('auto-resumes current slot when page loads mid-program', async ({ page }) => {
     await page.clock.install({ time: new Date('2026-07-20T10:15:00+02:00') })
     await page.goto('./')
     await expect(modal(page)).toBeVisible({ timeout: 20_000 })
     await assertCloseButtonOnTop(page)
-    await expect(page.getByText(/mindenkit sokko/i)).toBeVisible()
+    await expect(modal(page).locator('video')).toBeAttached()
   })
 })

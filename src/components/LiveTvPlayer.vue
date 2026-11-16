@@ -158,7 +158,7 @@ async function startHls() {
   el.onerror = () => onStreamError()
 
   if (Hls.isSupported()) {
-    hls = new Hls({ lowLatencyMode: true, enableWorker: true })
+    hls = new Hls({ lowLatencyMode: true, enableWorker: true, capLevelToPlayerSize: true }) // never pick 4K on the Pi
     hls.loadSource(activeLink.value)
     hls.attachMedia(el)
 

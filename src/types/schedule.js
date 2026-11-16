@@ -12,6 +12,7 @@
  * @property {string} [platform] - Display label for external services (e.g. "Netflix", "Max")
  * @property {string} [end_time] - HH:MM auto-close time
  * @property {string[]} [fallback_links] - Backup URLs tried if primary fails pre-flight or playback
+ * @property {string[]} [channel_ids] - iptv-org channel IDs; scripts/refresh-streams.js rebuilds link + fallback_links from them
  */
 
 /**

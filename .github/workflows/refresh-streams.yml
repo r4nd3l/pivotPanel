@@ -1,0 +1,51 @@
+name: Refresh IPTV streams
+
+# Weekly: re-resolve every live slot from its iptv-org channel_ids, open a PR if links changed,
+# and fail the run (GitHub e-mails you) if any slot has no playable stream left.
+on:
+  schedule:
+    - cron: '0 4 * * 1' # Mondays 04:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      # Scripts use only Node built-ins, so no npm install needed.
+      - name: Refresh stream links
+        id: refresh
+        continue-on-error: true
+        run: node scripts/refresh-streams.js
+
+      - name: Open PR if links changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet -- src/storage; then
+            echo "No link changes."
+            exit 0
+          fi
+          branch="bot/refresh-streams-$(date +%F)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git commit -am "chore(streams): refresh IPTV links from iptv-org"
+          git push -u origin "$branch"
+          gh pr create --base main --head "$branch" \
+            --title "chore(streams): refresh IPTV links ($(date +%F))" \
+            --body "Automated weekly refresh: dead stream links were replaced with working HTTPS, non-adult streams of the same iptv-org channels. Run \`npm run test:e2e\` locally, merge, then \`npm run build && npm run deploy\`."
+
+      - name: Fail if a slot has no playable stream
+        if: steps.refresh.outcome == 'failure'
+        run: |
+          echo "::error::At least one slot has no playable stream. Pick a new channel_ids entry for it."
+          exit 1
