@@ -1,19 +1,22 @@
 #!/usr/bin/env node
 /**
- * Validates all movie links in plan_2026.json (oEmbed for YouTube; HLS played down to a segment).
+ * Validates all movie links in every src/storage/plan_<year>.json (oEmbed for YouTube; HLS played down to a segment).
  * Live (IPTV) links must also pass the iptv-org allow-list: HTTPS, non-adult, from the slot's channel_ids.
  * Run: node scripts/validate-schedule.js
  */
-import { readFileSync, writeFileSync } from 'fs'
+import { readFileSync, writeFileSync, readdirSync } from 'fs'
 import { fileURLToPath } from 'url'
 import { dirname, join } from 'path'
 import { loadIptvOrg, rejectReason, checkStream } from './lib/iptv.js'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
-const planPath = join(root, 'src/storage/plan_2026.json')
-
-/** @type {import('../src/types/schedule.js').ScheduleApiResponse} */
-const plan = JSON.parse(readFileSync(planPath, 'utf8'))
+const storage = join(root, 'src/storage')
+/** @type {{ calendar: import('../src/types/schedule.js').CalendarDay[] }} all years merged */
+const plan = {
+  calendar: readdirSync(storage)
+    .filter((f) => /^plan_\d{4}\.json$/.test(f))
+    .flatMap((f) => JSON.parse(readFileSync(join(storage, f), 'utf8')).calendar),
+}
 
 /**
  * @param {string} url

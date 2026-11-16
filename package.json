@@ -11,6 +11,7 @@
     "test:e2e:live": "E2E_BASE_URL=https://r4nd3l.github.io/pivotPanel playwright test",
     "validate:schedule": "node scripts/validate-schedule.js",
     "refresh:streams": "node scripts/refresh-streams.js",
+    "generate:plan": "node scripts/generate-plan.js",
     "test:e2e:ui": "playwright test --ui",
     "deploy": "gh-pages -d dist"
   },
