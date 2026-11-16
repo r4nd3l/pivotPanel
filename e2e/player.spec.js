@@ -56,8 +56,8 @@ test.describe('PivotPanel player', () => {
 
   test('loads embedded schedule without ?schedule= param', async ({ page }) => {
     await expect(page).toHaveURL(/\/pivotPanel\/?$/)
-    await expect(page.getByRole('button', { name: /^Euronews - Híradó$/i }).first()).toBeVisible()
-    await expect(page.getByRole('button', { name: /^Euronews - Esti híradó$/i })).toBeVisible()
+    await expect(page.getByRole('button', { name: /^7.TV Békéscsaba$/i }).first()).toBeVisible()
+    await expect(page.getByRole('button', { name: /^7.TV Békéscsaba - Este$/i })).toBeVisible()
   })
 
   test('schedule has no YouTube links left', async ({ page }) => {
@@ -70,11 +70,11 @@ test.describe('PivotPanel player', () => {
 
   // Every IPTV slot must actually reach playback (video fades in only on 'playing')
   for (const title of [
-    'Euronews - Híradó',
+    '7.TV Békéscsaba',
     'Love Nature - Természetfilm',
     'Alföld TV',
     'Oxygen Music - Zene',
-    'Euronews - Esti híradó',
+    '7.TV Békéscsaba - Este',
   ]) {
     test(`IPTV slot plays: ${title}`, async ({ page }) => {
       await page.getByRole('button', { name: title, exact: true }).first().click()
@@ -93,4 +93,18 @@ test.describe('PivotPanel player', () => {
     await assertCloseButtonOnTop(page)
     await expect(modal(page).locator('video')).toBeAttached()
   })
+})
+
+test.describe('2027 plan', () => {
+  for (const [date, holiday] of [
+    ['2027-01-01T12:00:00+01:00', 'Újév'],
+    ['2027-12-24T12:00:00+01:00', 'Karácsony előestéje'],
+  ]) {
+    test(`loads plan_2027.json on ${date.slice(0, 10)} (${holiday})`, async ({ page }) => {
+      await installClock(page, new Date(date))
+      await waitForHome(page)
+      await expect(page.getByText(holiday)).toBeVisible()
+      await expect(page.getByRole('button', { name: 'Alföld TV', exact: true })).toBeVisible()
+    })
+  }
 })
